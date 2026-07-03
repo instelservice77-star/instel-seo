@@ -1,0 +1,21 @@
+{
+  "_comentario": "Cada chave Ã© o 'id' do serviÃ§o (ver data/servicos.json). Use a chave 'default' como fallback genÃ©rico se nÃ£o quiser separar por serviÃ§o. As URLs devem ser de imagens jÃ¡ hospedadas (ex: na Biblioteca de MÃ­dia do WordPress). AtÃ© 5 imagens sÃ£o usadas por post; o restante Ã© ignorado.",
+
+  "default": [],
+
+  "estudo-de-cargas-eletricas": [],
+  "estudo-de-demanda": [],
+  "estudo-para-instalacao-de-carregadores-eletricos": [],
+  "estudo-de-curva-de-carga-avcb": [],
+  "estudo-de-viabilidade-eletrica": [],
+  "laudo-de-instalacoes-eletricas": [],
+  "laudo-nr10": [
+    {
+      "url": "https://instelservice.com.br/wp-content/uploads/EXEMPLO-laudo-nr10-01.webp",
+      "alt": "Vistoria tÃ©cnica NR10 em painel elÃ©trico"
+    }
+  ],
+  "projetos-unifilares": [],
+  "consultoria-eletrica": [],
+  "laudo-eletrico-avcb": []
+}
