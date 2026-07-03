@@ -1,0 +1,13 @@
+{
+  "name": "instel-seo-pipeline",
+  "version": "1.0.0",
+  "description": "Pipeline de geraÃ§Ã£o e publicaÃ§Ã£o automÃ¡tica de conteÃºdo SEO para a Instel Service (engenharia elÃ©trica)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "gerar-posts": "node scripts/gerar-posts.js"
+  }
+}
