@@ -1,0 +1,935 @@
+[
+  {
+    "nome": "Alto de Pinheiros",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Itaim Bibi",
+      "Jardim Paulista",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Anhanguera",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Perus"
+    ]
+  },
+  {
+    "nome": "Aricanduva",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Carrão",
+      "Vila Formosa"
+    ]
+  },
+  {
+    "nome": "Artur Alvim",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cangaíba",
+      "Penha",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Barra Funda",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Bela Vista",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Belém",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Bom Retiro",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Brasilândia",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Freguesia do Ó"
+    ]
+  },
+  {
+    "nome": "Brás",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Belém",
+      "Mooca",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Butantã",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Morumbi",
+      "Raposo Tavares",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Cachoeirinha",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Casa Verde",
+      "Limã"
+    ]
+  },
+  {
+    "nome": "Cambuci",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Campo Belo",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Campo Grande",
+      "Santo Amaro"
+    ]
+  },
+  {
+    "nome": "Campo Grande",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Campo Belo",
+      "Santo Amaro"
+    ]
+  },
+  {
+    "nome": "Campo Limpo",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Capão Redondo",
+      "Vila Andrade"
+    ]
+  },
+  {
+    "nome": "Cangaíba",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Artur Alvim",
+      "Penha",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Cap0�o Redondo",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Campo Limpo",
+      "Vila Andrade"
+    ]
+  },
+  {
+    "nome": "Carrão",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Aricanduva",
+      "Vila Formosa"
+    ]
+  },
+  {
+    "nome": "Casa Verde",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cachoeirinha",
+      "Limã"
+    ]
+  },
+  {
+    "nome": "Cidade Ademar",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Pedreira"
+    ]
+  },
+  {
+    "nome": "Cidade Dutra",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Grajaú",
+      "Socorro"
+    ]
+  },
+  {
+    "nome": "Cidade Líder",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Itaquera",
+      "José Bonifácio",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Cidade Tiradentes",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": []
+  },
+  {
+    "nome": "Consolação",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Cursino",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Ipiranga",
+      "Sacomã"
+    ]
+  },
+  {
+    "nome": "Ermelino Matarazzo",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Ponte Rasa"
+    ]
+  },
+  {
+    "nome": "Freguesia do Ó",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Brasilândia"
+    ]
+  },
+  {
+    "nome": "Grajaú",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Dutra",
+      "Socorro"
+    ]
+  },
+  {
+    "nome": "Guaianases",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Lajeado"
+    ]
+  },
+  {
+    "nome": "Iguatemi",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "São Mateus",
+      "São Rafael"
+    ]
+  },
+  {
+    "nome": "Ipiranga",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cursino",
+      "Sacomã"
+    ]
+  },
+  {
+    "nome": "Itaim Bibi",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Jardim Paulista",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Itaim Paulista",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Vila Curuçá"
+    ]
+  },
+  {
+    "nome": "Itaquera",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Líder",
+      "José Bonifácio",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Jabaquara",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": []
+  },
+  {
+    "nome": "Jaguara",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Jaguaré",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Jaraguá",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Pirituba",
+      "São Domingos"
+    ]
+  },
+  {
+    "nome": "Jardim Helena",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "São Miguel",
+      "Vila Jacuí"
+    ]
+  },
+  {
+    "nome": "Jardim Paulista",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Itaim Bibi",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Jardim São Luís",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jardim Ângela"
+    ]
+  },
+  {
+    "nome": "Jardim Ângela",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jardim São Luís"
+    ]
+  },
+  {
+    "nome": "Jaçanã",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Tremembé"
+    ]
+  },
+  {
+    "nome": "José Bonifácio",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Líder",
+      "Itaquera",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Lajeado",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Guaianases"
+    ]
+  },
+  {
+    "nome": "Lapa",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Liberdade",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Limão",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cachoeirinha",
+      "Casa Verde"
+    ]
+  },
+  {
+    "nome": "Mandaqui",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Santana",
+      "Tucuruvi"
+    ]
+  },
+  {
+    "nome": "Marsilac",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Parelheiros"
+    ]
+  },
+  {
+    "nome": "Moema",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Saúde",
+      "Vila Mariana"
+    ]
+  },
+  {
+    "nome": "Mooca",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Morumbi",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Butantã",
+      "Raposo Tavares",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Parelheiros",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Marsilac"
+    ]
+  },
+  {
+    "nome": "Pari",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Parque do Carmo",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Líder",
+      "Itaquera",
+      "José Bonifácio"
+    ]
+  },
+  {
+    "nome": "Pedreira",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Ademar"
+    ]
+  },
+  {
+    "nome": "Penha",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Artur Alvim",
+      "Cangaíba",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Perdizes",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Perus",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Anhanguera"
+    ]
+  },
+  {
+    "nome": "Pinheiros",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Itaim Bibi",
+      "Jardim Paulista"
+    ]
+  },
+  {
+    "nome": "Pirituba",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jaraguá",
+      "São Domingos"
+    ]
+  },
+  {
+    "nome": "Ponte Rasa",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Ermelino Matarazzo"
+    ]
+  },
+  {
+    "nome": "Raposo Tavares",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "República",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Rio Pequeno",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Raposo Tavares",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Sacomã",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cursino",
+      "Ipiranga"
+    ]
+  },
+  {
+    "nome": "Santa Cecília",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Santana",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Mandaqui",
+      "Tucuruvi"
+    ]
+  },
+  {
+    "nome": "Santo Amaro",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Campo Belo",
+      "Campo Grande"
+    ]
+  },
+  {
+    "nome": "Sapopemba",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": []
+  },
+  {
+    "nome": "Saúde",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Moema",
+      "Vila Mariana"
+    ]
+  },
+  {
+    "nome": "Socorro",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Cidade Dutra",
+      "Grajaú"
+    ]
+  },
+  {
+    "nome": "São Domingos",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jaraguá",
+      "Pirituba"
+    ]
+  },
+  {
+    "nome": "São Lucas",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Vila Prudente"
+    ]
+  },
+  {
+    "nome": "São Mateus",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Iguatemi",
+      "São Rafael"
+    ]
+  },
+  {
+    "nome": "São Miguel",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jardim Helena",
+      "Vila Jacuí"
+    ]
+  },
+  {
+    "nome": "São Rafael",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Iguatemi",
+      "São Mateus"
+    ]
+  },
+  {
+    "nome": "Sé",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília"
+    ]
+  },
+  {
+    "nome": "Tatuapé",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Tremembé",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jaçanã"
+    ]
+  },
+  {
+    "nome": "Tucuruvi",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Mandaqui",
+      "Santana"
+    ]
+  },
+  {
+    "nome": "Vila Andrade",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Campo Limpo",
+      "Capão Redondo"
+    ]
+  },
+  {
+    "nome": "Vila Curuçá",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Itaim Paulista"
+    ]
+  },
+  {
+    "nome": "Vila Formosa",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Aricanduva",
+      "Carrão"
+    ]
+  },
+  {
+    "nome": "Vila Guilherme",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Vila Maria",
+      "Vila Medeiros"
+    ]
+  },
+  {
+    "nome": "Vila Jacuí",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Jardim Helena",
+      "São Miguel"
+    ]
+  },
+  {
+    "nome": "Vila Leopoldina",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes"
+    ]
+  },
+  {
+    "nome": "Vila Maria",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Vila Guilherme",
+      "Vila Medeiros"
+    ]
+  },
+  {
+    "nome": "Vila Mariana",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Moema",
+      "Saúde"
+    ]
+  },
+  {
+    "nome": "Vila Matilde",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Artur Alvim",
+      "Cangaíba",
+      "Penha"
+    ]
+  },
+  {
+    "nome": "Vila Medeiros",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Vila Guilherme",
+      "Vila Maria"
+    ]
+  },
+  {
+    "nome": "Vila Prudente",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "São Lucas"
+    ]
+  },
+  {
+    "nome": "Vila Sônia",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Raposo Tavares",
+      "Rio Pequeno"
+    ]
+  },
+  {
+    "nome": "Água Rasa",
+    "tipo": "bairro",
+    "cidadeReferencia": "São Paulo (Capital)",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Tatuapé"
+    ]
+  }
+]
