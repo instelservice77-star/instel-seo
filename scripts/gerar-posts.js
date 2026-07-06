@@ -1,23 +1,23 @@
-// gerar-posts.js — Instel Service SEO Pipeline v2
-// Melhorias v2: galeria com lightbox (estilo Vistoh), bootstrap automático de imagens,
-// tabela de obrigatoriedade no conteúdo, schemas Person + LocalBusiness,
-// prompt enriquecido com contexto por localidade.
+// gerar-posts.js
+// Pipeline de geração e publicação automática de conteúdo SEO — Instel Service
+// Estrutura de página inspirada em referência de mercado, pensada para
+// SEO (rankear no Google) + AEO (ser citado em respostas de IA) +
+// GEO/AIO (ser entendido e reutilizado por LLMs) + SXO (conversão real via WhatsApp).
+// Roda via GitHub Actions (Node 20+, fetch nativo, sem dependências externas).
 
-import { readFile, writeFile } from "node:fs/promises";
-import { existsSync as existsSync_ } from "node:fs";
-import https from "node:https";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ---------------------------------------------------------------------------
-// 1. CONFIGURAÇÃO
+// 1. CONFIGURAÇÃO (lida de variáveis de ambiente / GitHub Secrets)
 // ---------------------------------------------------------------------------
 const CONFIG = {
   openaiApiKey: requireEnv("OPENAI_API_KEY"),
   openaiModel: process.env.OPENAI_MODEL || "gpt-4o",
-  wpUrl: requireEnv("WP_URL").replace(/\/+$/, ""),
+  wpUrl: requireEnv("WP_URL").replace(/\/+$/, ""), // sem barra final
   wpUser: requireEnv("WP_USER"),
   wpAppPassword: requireEnv("WP_APP_PASSWORD"),
   wpStatus: process.env.WP_STATUS || "publish",
@@ -31,269 +31,33 @@ const CONFIG = {
     "Fundador da Instel Service, atua há mais de 10 anos em engenharia elétrica e é responsável técnico por todos os serviços e conteúdos da empresa. Graduado em Engenharia Elétrica pela Universidade Nove de Julho, com certificação NR-10 e especialização em SPDA (NBR 5419).",
   responsavelUrlPerfil: process.env.RESPONSAVEL_URL_PERFIL || "https://instelservice.com.br/autor/",
   whatsapp: process.env.WP_WHATSAPP || "(11) 2987-5942",
-  whatsappLink: process.env.WP_WHATSAPP_LINK || null,
-  email: process.env.WP_EMAIL || "contato@instelservice.com.br",
+  email: process.env.WP_EMAIL || "juliano@instelservice.com.br",
+  whatsappLink: process.env.WP_WHATSAPP_LINK || null, // se vazio, é derivado do telefone
   postsPorDia: parseInt(process.env.POSTS_POR_DIA || "10", 10),
   minRelacionadosParaExibir: parseInt(process.env.MIN_RELACIONADOS || "3", 10),
+  // Permite forçar um índice inicial específico para testes (opcional)
   indiceForcado:
     process.env.INDICE_FORCADO !== undefined && process.env.INDICE_FORCADO !== ""
       ? parseInt(process.env.INDICE_FORCADO, 10)
       : null,
-  // Cache de imagens já enviadas ao WP (evita re-upload a cada run)
-  imagensCache: "/tmp/instel-imagens-wp.json",
 };
 
 function requireEnv(name) {
   const value = process.env[name];
-  if (!value) throw new Error(`Variável de ambiente obrigatória ausente: ${name}`);
+  if (!value) {
+    throw new Error(`Variável de ambiente obrigatória ausente: ${name}`);
+  }
   return value;
 }
 
 function montarLinkWhatsapp(mensagem) {
-  const numero = CONFIG.whatsappLink || `55${CONFIG.whatsapp.replace(/\D/g, "")}`;
+  const numero =
+    CONFIG.whatsappLink || `55${CONFIG.whatsapp.replace(/\D/g, "")}`;
   return `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 }
 
 // ---------------------------------------------------------------------------
-// 2. BANCO DE IMAGENS — metadados SEO por foto
-//    Adicione arquivos .webp em instel-seo/imagens/ com esses nomes exatos.
-//    Na primeira execução eles serão enviados ao WordPress e cacheados.
-//    Se o arquivo não existir, a imagem é simplesmente ignorada (sem erro).
-// ---------------------------------------------------------------------------
-const IMAGENS_META = [
-  { arquivo: "art-eletrica-01.webp", alt: "engenheiro elétrico realizando inspeção técnica em instalação de baixa tensão" },
-  { arquivo: "art-eletrica-02.webp", alt: "laudo elétrico com ART do CREA-SP e assinatura de engenheiro responsável" },
-  { arquivo: "art-eletrica-03.webp", alt: "painel elétrico com disjuntores identificados em vistoria técnica" },
-  { arquivo: "art-instalacoes-eletricas-01.webp", alt: "instalação elétrica residencial com fiação organizada e identificada" },
-  { arquivo: "art-instalacoes-eletricas-02.webp", alt: "quadro de distribuição elétrica sendo inspecionado por engenheiro" },
-  { arquivo: "art-instalacoes-eletricas-03.webp", alt: "medição elétrica com equipamentos técnicos em instalação comercial" },
-  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-01.webp", alt: "consultoria elétrica para adequação NR-10 em empresa em São Paulo" },
-  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-02.webp", alt: "engenheiro realizando diagnóstico elétrico para adequação à NR-10" },
-  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-01.webp", alt: "laudo técnico elétrico sendo elaborado por engenheiro CREA-SP em São Paulo" },
-  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-02.webp", alt: "relatório técnico de instalação elétrica com fotos e recomendações" },
-];
-
-// ---------------------------------------------------------------------------
-// 3. UPLOAD AUTOMÁTICO DE IMAGENS AO WORDPRESS (na 1ª execução)
-// ---------------------------------------------------------------------------
-function httpRequestNode(options, body = null) {
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
-      const chunks = [];
-      res.on("data", (chunk) => chunks.push(chunk));
-      res.on("end", () => {
-        const data = Buffer.concat(chunks);
-        try { resolve({ status: res.statusCode, body: JSON.parse(data.toString()) }); }
-        catch { resolve({ status: res.statusCode, body: data.toString() }); }
-      });
-    });
-    req.on("error", reject);
-    if (body) req.write(body);
-    req.end();
-  });
-}
-
-async function bootstrapImagens() {
-  // Verificar cache
-  try {
-    const cache = JSON.parse(await readFile(CONFIG.imagensCache, "utf-8"));
-    if (cache.length === IMAGENS_META.length) {
-      console.log(`📸 ${cache.length} imagens já no WordPress (cache)`);
-      return cache;
-    }
-  } catch { /* cache não existe ainda */ }
-
-  console.log("📸 Verificando imagens para upload...");
-  const uploaded = [];
-  const wpHost = new URL(CONFIG.wpUrl).hostname;
-  const wpAuth = "Basic " + Buffer.from(`${CONFIG.wpUser}:${CONFIG.wpAppPassword}`).toString("base64");
-
-  for (const meta of IMAGENS_META) {
-    const imgPath = path.join(__dirname, "..", "imagens", meta.arquivo);
-
-    if (!existsSync_(imgPath)) {
-      console.log(`  ⚠️  ${meta.arquivo} não encontrado em ./imagens/ — pulando`);
-      uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
-      continue;
-    }
-
-    const imgData = await readFile(imgPath);
-
-    try {
-      const res = await httpRequestNode({
-        hostname: wpHost,
-        path: "/wp-json/wp/v2/media",
-        method: "POST",
-        headers: {
-          Authorization: wpAuth,
-          "Content-Type": "image/webp",
-          "Content-Disposition": `attachment; filename="${meta.arquivo}"`,
-          "Content-Length": imgData.length,
-        },
-      }, imgData);
-
-      if (res.body?.id) {
-        const mediaId = res.body.id;
-        const mediaUrl = res.body.source_url;
-        // Atualizar alt text
-        const updateBody = Buffer.from(JSON.stringify({ alt_text: meta.alt, caption: `Instel Service — ${meta.alt}`, title: meta.arquivo.replace(".webp", "") }));
-        await httpRequestNode({
-          hostname: wpHost,
-          path: `/wp-json/wp/v2/media/${mediaId}`,
-          method: "POST",
-          headers: { Authorization: wpAuth, "Content-Type": "application/json", "Content-Length": updateBody.length },
-        }, updateBody);
-        uploaded.push({ arquivo: meta.arquivo, url: mediaUrl, id: mediaId, alt: meta.alt });
-        console.log(`  ✅ ${meta.arquivo} → ID ${mediaId}`);
-      } else {
-        console.log(`  ❌ ${meta.arquivo}: ${JSON.stringify(res.body).substring(0, 100)}`);
-        uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
-      }
-    } catch (err) {
-      console.log(`  ❌ ${meta.arquivo}: ${err.message}`);
-      uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
-    }
-
-    await new Promise((r) => setTimeout(r, 500));
-  }
-
-  const sucesso = uploaded.filter((u) => u.url).length;
-  console.log(`📸 Imagens: ${sucesso}/${IMAGENS_META.length} disponíveis`);
-  await writeFile(CONFIG.imagensCache, JSON.stringify(uploaded, null, 2));
-  return uploaded;
-}
-
-// Seleciona 5 imagens rotativas por post (mesmo seed = mesmo conjunto, evita repetição sequencial)
-function selecionarImagens(imagensWP, postIndex) {
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-  const seed = dayOfYear * CONFIG.postsPorDia + postIndex;
-  const disponiveis = imagensWP.filter((i) => i.url);
-  if (disponiveis.length === 0) return [];
-  const selecionadas = [];
-  for (let i = 0; i < 5; i++) {
-    selecionadas.push(disponiveis[(seed + i * 7) % disponiveis.length]);
-  }
-  return selecionadas;
-}
-
-// ---------------------------------------------------------------------------
-// 4. GALERIA COM LIGHTBOX (estilo Vistoh)
-// ---------------------------------------------------------------------------
-function montarGaleria(listaImagens, { servico, localidade }) {
-  if (!listaImagens || listaImagens.length === 0) return "";
-
-  const altContextos = [
-    `${servico.nome} em ${localidade.nome} — inspeção técnica no local`,
-    `Laudo elétrico ${localidade.nome} — Instel Service`,
-    `${servico.nome} em ${localidade.nome} — Engenheiro CREA-SP`,
-    `Instalação elétrica ${localidade.nome} — vistoria com marcações técnicas`,
-    `${servico.nome} — laudo com ART do CREA-SP`,
-  ];
-
-  const lbId = "lb" + Math.random().toString(36).slice(2, 8);
-
-  const galeriaHtml = `<style>
-.gt-${lbId}{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 24px}
-.gt-${lbId} figure{margin:0;flex:0 0 calc(20% - 5px)}
-.gt-${lbId} a{display:block;cursor:zoom-in}
-.gt-${lbId} img{width:100%;height:110px;object-fit:cover;border-radius:4px;display:block;transition:opacity .2s}
-.gt-${lbId} img:hover{opacity:.8}
-@media(max-width:600px){.gt-${lbId} figure{flex:0 0 calc(33.33% - 4px)}.gt-${lbId} img{height:80px}}
-.vlb-${lbId}{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:99999;align-items:center;justify-content:center;flex-direction:column}
-.vlb-${lbId}.open{display:flex}
-.vlb-${lbId} img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 4px 32px rgba(0,0,0,.5)}
-.vlb-${lbId} .vlb-close{position:fixed;top:16px;right:20px;font-size:36px;color:#fff;cursor:pointer;line-height:1;opacity:.85;background:none;border:none;z-index:100000}
-.vlb-${lbId} .vlb-prev,.vlb-${lbId} .vlb-next{position:fixed;top:50%;transform:translateY(-50%);font-size:48px;color:#fff;cursor:pointer;opacity:.75;background:none;border:none;z-index:100000;padding:0 12px;line-height:1}
-.vlb-${lbId} .vlb-prev{left:8px}.vlb-${lbId} .vlb-next{right:8px}
-.vlb-${lbId} .vlb-prev:hover,.vlb-${lbId} .vlb-next:hover,.vlb-${lbId} .vlb-close:hover{opacity:1}
-.vlb-${lbId} .vlb-counter{color:rgba(255,255,255,.7);font-size:14px;margin-top:10px;font-family:sans-serif}
-.vlb-${lbId} .vlb-caption{color:rgba(255,255,255,.85);font-size:13px;margin-top:6px;font-family:sans-serif;text-align:center;max-width:80vw}
-</style>
-<div class="gt-${lbId}">
-${listaImagens.map((img, i) =>
-  `<figure><a href="${escapeHtml(img.url)}" data-vlb="${lbId}" data-idx="${i}"><img src="${escapeHtml(img.url)}" alt="${escapeHtml(altContextos[i] || img.alt)}" loading="${i === 0 ? "eager" : "lazy"}" width="800" height="533" /></a></figure>`
-).join("\n")}
-</div>
-<div class="vlb-${lbId}" id="vlb-${lbId}">
-  <button class="vlb-close" id="vlb-x-${lbId}" aria-label="Fechar">&#10005;</button>
-  <button class="vlb-prev" id="vlb-p-${lbId}" aria-label="Anterior">&#8249;</button>
-  <img id="vlb-img-${lbId}" src="" alt="" />
-  <button class="vlb-next" id="vlb-n-${lbId}" aria-label="Próxima">&#8250;</button>
-  <div class="vlb-counter" id="vlb-cnt-${lbId}"></div>
-  <div class="vlb-caption" id="vlb-cap-${lbId}"></div>
-</div>
-<script type="text/javascript">
-(function(){
-  var IMGS=${JSON.stringify(listaImagens.map((img, i) => ({ url: img.url, alt: altContextos[i] || img.alt })))};
-  var cur=0,box=document.getElementById('vlb-${lbId}');
-  function show(i){cur=(i+IMGS.length)%IMGS.length;var el=document.getElementById('vlb-img-${lbId}');el.src=IMGS[cur].url;el.alt=IMGS[cur].alt;document.getElementById('vlb-cnt-${lbId}').textContent=(cur+1)+' / '+IMGS.length;document.getElementById('vlb-cap-${lbId}').textContent=IMGS[cur].alt;}
-  function openLB(i){box.classList.add('open');document.body.style.overflow='hidden';show(i);}
-  function closeLB(){box.classList.remove('open');document.body.style.overflow='';}
-  document.getElementById('vlb-x-${lbId}').addEventListener('click',closeLB);
-  document.getElementById('vlb-p-${lbId}').addEventListener('click',function(){show(cur-1);});
-  document.getElementById('vlb-n-${lbId}').addEventListener('click',function(){show(cur+1);});
-  box.addEventListener('click',function(e){if(e.target===box)closeLB();});
-  document.addEventListener('click',function(e){var a=e.target.closest('[data-vlb="${lbId}"]');if(a){e.preventDefault();openLB(parseInt(a.getAttribute('data-idx'))||0);}});
-  document.addEventListener('keydown',function(e){if(!box.classList.contains('open'))return;if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1);if(e.key==='Escape')closeLB();});
-})();
-</script>`;
-
-  return galeriaHtml;
-}
-
-// ---------------------------------------------------------------------------
-// 5. TABELA DE APLICABILIDADE DO SERVIÇO
-//    Inserida após o bloco "O que avaliamos" — contexto sem preço (a consultar)
-// ---------------------------------------------------------------------------
-function montarTabelaAplicabilidade(servico) {
-  // Mapeamento por tipo de serviço → linhas da tabela
-  const tabelas = {
-    "laudo-demanda-eletrica": [
-      ["Contratação de nova ligação", "ANEEL / concessionária", "Obrigatório"],
-      ["Adequação de demanda contratada", "ANEEL Resolução 414", "Obrigatório"],
-      ["Expansão de capacidade instalada", "NBR 5410", "Recomendado"],
-      ["Empresas com consumo acima de 75 kW", "ANEEL / NR-10", "Obrigatório"],
-    ],
-    "laudo-nr10": [
-      ["Trabalhadores que atuam em instalações elétricas", "NR-10 item 10.8", "Obrigatório"],
-      ["Prontuário das instalações elétricas", "NR-10 item 10.2.4", "Obrigatório"],
-      ["Empresas com geração própria", "NR-10 Seção II", "Obrigatório"],
-      ["Manutenção em alta tensão", "NR-10 item 10.9", "Obrigatório"],
-    ],
-    "estudo-de-cargas-eletricas": [
-      ["Projeto de instalação residencial nova", "NBR 5410", "Obrigatório"],
-      ["Reforma com aumento de carga", "NBR 5410", "Obrigatório"],
-      ["Dimensionamento de equipamentos industriais", "NBR 5462", "Recomendado"],
-      ["Edificações multifamiliares", "NBR 5410 + ABNT", "Obrigatório"],
-    ],
-    "spda-para-raios": [
-      ["Edificações acima de 5 andares", "NBR 5419", "Obrigatório"],
-      ["Estruturas com área superior a 250 m²", "NBR 5419", "Análise de risco"],
-      ["Instalações com equipamentos sensíveis", "NBR 5419", "Recomendado"],
-      ["Indústrias e áreas classificadas", "NBR 5419 + NR-10", "Obrigatório"],
-    ],
-  };
-
-  const linhas = tabelas[servico.id] || [
-    ["Instalações residenciais e comerciais novas", "NBR 5410", "Obrigatório"],
-    ["Reformas e adequações elétricas", "NBR 5410 / ABNT", "Obrigatório"],
-    ["Fiscalização e vistoria técnica", "CREA-SP / ART", "Recomendado"],
-    ["Regularização junto a órgãos", "Concessionária / Bombeiros", "Situacional"],
-  ];
-
-  return `<h2>Quando o serviço é obrigatório ou recomendado</h2>
-<table>
-<thead><tr><th>Situação</th><th>Base legal / norma</th><th>Exigência</th></tr></thead>
-<tbody>
-${linhas.map(([s, b, e]) => `<tr><td>${s}</td><td>${b}</td><td>${e}</td></tr>`).join("\n")}
-</tbody>
-</table>
-<p>Todos os laudos incluem Anotação de Responsabilidade Técnica (ART) registrada no CREA-SP, documento com validade jurídica necessário para apresentação a concessionárias, prefeitura, Corpo de Bombeiros e outros órgãos.</p>`;
-}
-
-// ---------------------------------------------------------------------------
-// 6. CARREGAMENTO DOS DADOS
+// 2. CARREGAMENTO DOS DADOS (serviços × localidades × imagens)
 // ---------------------------------------------------------------------------
 async function carregarJson(nomeArquivo, fallback) {
   try {
@@ -306,19 +70,22 @@ async function carregarJson(nomeArquivo, fallback) {
 }
 
 async function carregarDados() {
-  const [servicos, localidades] = await Promise.all([
+  const [servicos, localidades, imagens] = await Promise.all([
     carregarJson("servicos.json"),
     carregarJson("localidades.json"),
+    carregarJson("imagens.json", {}), // opcional — ver README sobre como preencher
   ]);
-  return { servicos, localidades };
+  return { servicos, localidades, imagens };
 }
 
 // ---------------------------------------------------------------------------
-// 7. ROTAÇÃO DE COMBINAÇÕES
+// 3. LÓGICA DE ROTAÇÃO (cobre todas as combinações progressivamente)
 // ---------------------------------------------------------------------------
 function diaDoAno(data = new Date()) {
   const inicioDoAno = new Date(data.getFullYear(), 0, 0);
-  return Math.floor((data - inicioDoAno) / (1000 * 60 * 60 * 24));
+  const diff = data - inicioDoAno;
+  const umDia = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / umDia);
 }
 
 export function gerarCombinacoesDoDia({ servicos, localidades }) {
@@ -338,55 +105,62 @@ export function gerarCombinacoesDoDia({ servicos, localidades }) {
       servico: servicos[servicoIdx],
       localidade: localidades[localidadeIdx],
       indiceGlobal: indice,
-      postIndex: i,
     });
   }
   return combinacoes;
 }
 
 // ---------------------------------------------------------------------------
-// 8. PROMPT PARA A IA — enriquecido com contexto de localidade
+// 4. PROMPT PARA A IA (OpenAI) — pede JSON estruturado por seção,
+//    para o script montar a página de forma determinística (sem depender
+//    da IA "se comportar" para H1, CTAs, preço, etc.)
 // ---------------------------------------------------------------------------
 function montarPromptSistema() {
-  return `Você é um redator técnico especializado em SEO, AEO e GEO, escrevendo para o site da empresa ${CONFIG.empresaNome}.
-O responsável técnico é ${CONFIG.responsavelNome} (${CONFIG.responsavelCredencial}).
+  return `Você é um redator técnico especializado em SEO, AEO e GEO (otimização para motores de busca tradicionais e para IAs generativas), escrevendo para o site da empresa ${CONFIG.empresaNome}.
+O responsável técnico do conteúdo é ${CONFIG.responsavelNome} (${CONFIG.responsavelCredencial}).
 
-Responda SEMPRE em JSON válido, sem markdown, sem crases, sem texto fora do JSON:
+Responda SEMPRE em JSON válido, sem markdown, sem crases, sem texto fora do JSON, seguindo exatamente este formato:
 
 {
-  "titulo": "string — título do post com serviço + localidade (máx 60 chars)",
-  "metaDescricao": "string — até 155 chars, serviço + localidade + ART CREA-SP + falar pelo WhatsApp",
-  "introducaoHtml": "<p> de abertura direta, com serviço, localidade e credencial CREA-SP, sem heading",
+  "titulo": "string, título do post (inclua o nome do serviço e da localidade)",
+  "metaDescricao": "string, até 155 caracteres, resumo atrativo para SEO",
+  "introducaoHtml": "1 parágrafo <p> de abertura, direto ao ponto, mencionando o serviço, a localidade e a credibilidade técnica (CREA-SP), sem usar heading",
   "secaoOQueE": {
-    "tituloH2": "O que é [serviço]?",
+    "tituloH2": "ex: O que é [serviço]?",
     "definicaoTecnica": { "tituloH3": "string", "html": "<p>...</p>" },
     "quemDeveContratar": { "tituloH3": "string", "html": "<p>...</p>" }
   },
   "secaoPorQueContratar": {
-    "tituloH2": "Por que contratar [serviço] em [localidade]?",
+    "tituloH2": "ex: Por que contratar [serviço] em [localidade]?",
     "contextoLocal": { "tituloH3": "string", "html": "<p>...</p>" },
     "riscosDeNaoContratar": { "tituloH3": "string", "html": "<p>...</p>" }
   },
   "secaoOQueEntregamos": {
-    "tituloH2": "O que avaliamos e entregamos no serviço",
-    "itens": [ { "tituloH3": "string", "html": "<p>...</p>" } ]
+    "tituloH2": "ex: O que avaliamos / entregamos no serviço",
+    "itens": [
+      { "tituloH3": "string", "html": "<p>...</p>" }
+    ]
   },
   "secaoComoFunciona": {
-    "tituloH2": "Como funciona o serviço da ${CONFIG.empresaNome} em [localidade]",
-    "itens": [ { "tituloH3": "string", "html": "<p>...</p>" } ]
+    "tituloH2": "ex: Como funciona o serviço da ${CONFIG.empresaNome} em [localidade]",
+    "itens": [
+      { "tituloH3": "string", "html": "<p>...</p>" }
+    ]
   },
-  "faq": [ { "pergunta": "string", "resposta": "string" } ]
+  "faq": [
+    { "pergunta": "string", "resposta": "string" }
+  ]
 }
 
 Regras obrigatórias:
-- NUNCA use <h1>, <h2>, <h3> dentro dos campos "html"
-- "secaoOQueEntregamos.itens": 4 a 6 itens com normas técnicas reais (NBR 5410, NR-10, NBR 5419, NBR 5462, exigências ANEEL/concessionária, Corpo de Bombeiros conforme o serviço)
-- "secaoComoFunciona.itens": exatamente 3 itens: 1) agendamento, 2) execução técnica, 3) entrega do laudo/ART
-- "faq": exatamente 5 perguntas específicas sobre o serviço na localidade, respostas de 2–4 frases cada
-- "contextoLocal": mencione características reais da localidade (perfil residencial/industrial/comercial, bairros ou municípios vizinhos se fornecidos), SEM inventar estatísticas ou percentuais
-- NUNCA mencione preço, valor ou custo — a consulta é feita diretamente com a empresa
-- Mínimo 900 palavras de conteúdo textual
-- Use <ul>/<li> quando listar itens`;
+- NUNCA use tags <h1>, <h2> ou <h3> dentro dos campos "html" — esses títulos já são os campos "tituloH2"/"tituloH3" e o script monta os headings.
+- "secaoOQueEntregamos.itens": entre 4 e 6 itens, cada um cobrindo um aspecto técnico diferente do serviço (ex: normas específicas verificadas, etapas do levantamento, tipos de não-conformidade comuns), citando normas técnicas/legais aplicáveis (NBR 5410, NBR 5419, NR-10, NR-12, exigências da concessionária/ANEEL, Corpo de Bombeiros/AVCB conforme o caso) de forma natural e correta — nunca cite uma norma errada para o contexto.
+- "secaoComoFunciona.itens": exatamente 3 itens, no padrão: 1) como agendar/contratar, 2) como é a execução técnica no local, 3) como é a entrega do laudo/documento final.
+- "faq": exatamente 5 perguntas frequentes específicas sobre "${"{{SERVICO}}"} em {{LOCALIDADE}}", com respostas objetivas (2-4 frases).
+- "secaoPorQueContratar.contextoLocal": pode mencionar bairros/municípios vizinhos reais se fornecidos no contexto, e características gerais conhecidas da região (perfil residencial/comercial/industrial), mas NUNCA invente números específicos (percentuais de valorização, estatísticas, quantidade de imóveis, dados que você não tem certeza). Se não tiver informação confiável sobre a região, fale em termos gerais sem citar números.
+- NUNCA mencione preço, valor, faixa de investimento ou custo em nenhum campo — isso é tratado separadamente pelo site.
+- Mínimo de 900 palavras somando todo o conteúdo textual (sem contar tags HTML).
+- Use <p>, <ul>/<li> quando fizer sentido. Linguagem clara para leigos, mantendo precisão técnica.`;
 }
 
 function montarPromptUsuario({ servico, localidade }) {
@@ -397,13 +171,12 @@ function montarPromptUsuario({ servico, localidade }) {
 
   const vizinhosTexto =
     localidade.vizinhos && localidade.vizinhos.length > 0
-      ? `Localidades vizinhas (pode citar naturalmente): ${localidade.vizinhos.join(", ")}.`
+      ? `Bairros vizinhos reais (mesma subprefeitura, pode citar): ${localidade.vizinhos.join(", ")}.`
       : "";
 
-  const perfilLocal =
-    localidade.tipo === "bairro"
-      ? "Bairro urbano de São Paulo com mix residencial, comercial e industrial."
-      : `Município do interior paulista com perfil predominantemente ${localidade.nome.includes("Campinas") || localidade.nome.includes("Sorocaba") || localidade.nome.includes("São José") ? "urbano e industrial" : "residencial e agroindustrial"}.`;
+  const perfilLocal = localidade.tipo === "bairro"
+    ? `Bairro urbano de São Paulo com mix residencial, comercial e industrial.`
+    : `Município do interior paulista com perfil predominantemente residencial e agroindustrial.`;
 
   return `Escreva o conteúdo para uma página sobre o serviço "${servico.nome}" (${servico.descricaoCurta}), com foco em atendimento em ${contextoLocal}.
 
@@ -412,12 +185,12 @@ Responsável técnico: ${CONFIG.responsavelNome}, ${CONFIG.responsavelCredencial
 Perfil da localidade: ${perfilLocal}
 ${vizinhosTexto}
 
-Mencione ${localidade.nome} pelo menos 6 vezes no texto. Mencione ${CONFIG.empresaNome} pelo menos 3 vezes.
-Siga rigorosamente o formato JSON e as regras definidas no sistema.`;
+Mencione ${localidade.nome} pelo menos 6 vezes. Mencione ${CONFIG.empresaNome} pelo menos 3 vezes.
+Siga rigorosamente o formato JSON e as regras definidas nas instruções de sistema.`;
 }
 
 // ---------------------------------------------------------------------------
-// 9. CHAMADA À API DA OPENAI
+// 5. CHAMADA À API DA OPENAI
 // ---------------------------------------------------------------------------
 async function gerarConteudoComIA({ servico, localidade }) {
   const resposta = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -447,14 +220,28 @@ async function gerarConteudoComIA({ servico, localidade }) {
   return parsearJsonDaIA(textoBruto);
 }
 
+// Armadilha conhecida: a API às vezes envolve a resposta em ```json ... ```
+// mesmo com response_format=json_object. Limpa antes de parsear.
 function parsearJsonDaIA(textoBruto) {
-  const limpo = textoBruto.replace(/^```(?:json|html)?\s*/i, "").replace(/```\s*$/i, "").trim();
-  try { return JSON.parse(limpo); }
-  catch (erro) {
-    throw new Error(`Falha ao parsear JSON da IA: ${limpo.slice(0, 500)}`);
+  const limpo = removerMarkdownFences(textoBruto).trim();
+  try {
+    return JSON.parse(limpo);
+  } catch (erro) {
+    throw new Error(
+      `Falha ao parsear JSON retornado pela IA. Conteúdo recebido (primeiros 500 caracteres): ${limpo.slice(
+        0,
+        500
+      )}`
+    );
   }
 }
 
+function removerMarkdownFences(texto) {
+  return texto.replace(/^```(?:json|html)?\s*/i, "").replace(/```\s*$/i, "");
+}
+
+// Strip agressivo de <h1>/<h2>/<h3> em campos de texto livre, por segurança
+// (defesa extra — a IA já é instruída a nunca usar headings nesses campos)
 function removerHeadingsIndevidos(html) {
   return String(html || "").replace(/<h[1-3][^>]*>[\s\S]*?<\/h[1-3]>/gi, "");
 }
@@ -476,8 +263,117 @@ function slugify(texto) {
 }
 
 // ---------------------------------------------------------------------------
-// 10. BREADCRUMB
+// 6. GALERIA DE IMAGENS (opcional — ver data/imagens.json e README)
 // ---------------------------------------------------------------------------
+function obterImagensDoServico(imagens, servico) {
+  const lista = imagens[servico.id] || imagens.default || [];
+  return Array.isArray(lista) ? lista.slice(0, 5) : [];
+}
+
+// CSS inline para não depender do bloco de galeria nativo do editor
+// (armadilha conhecida: temas como Astra forçam a galeria a 100% de largura).
+// Cada imagem fica dentro de um <a> clicável que abre o tamanho real.
+function montarGaleria(listaImagens, { servico, localidade }) {
+  if (!listaImagens || listaImagens.length === 0) return "";
+
+  const altContextos = [
+    `${servico.nome} em ${localidade.nome} — inspeção técnica no local`,
+    `Laudo elétrico ${localidade.nome} — Instel Service`,
+    `${servico.nome} em ${localidade.nome} — Engenheiro CREA-SP`,
+    `Instalação elétrica ${localidade.nome} — vistoria com marcações técnicas`,
+    `${servico.nome} — laudo com ART do CREA-SP`,
+  ];
+
+  const lbId = "lb" + Math.random().toString(36).slice(2, 8);
+
+  const items = listaImagens.map((img, i) =>
+    `<figure style="margin:0;flex:0 0 calc(20% - 5px)"><a href="${escapeHtml(img.url)}" data-vlb="${lbId}" data-idx="${i}" style="display:block;cursor:zoom-in"><img src="${escapeHtml(img.url)}" alt="${escapeHtml(altContextos[i] || img.alt)}" loading="${i === 0 ? "eager" : "lazy"}" style="width:100%;height:110px;object-fit:cover;border-radius:4px;display:block;transition:opacity .2s" /></a></figure>`
+  ).join("\n");
+
+  const imgsJson = JSON.stringify(listaImagens.map((img, i) => ({ url: img.url, alt: altContextos[i] || img.alt })));
+
+  return `<style>
+.vlb-${lbId}{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:99999;align-items:center;justify-content:center;flex-direction:column}
+.vlb-${lbId}.open{display:flex}
+.vlb-${lbId} img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px}
+.vlb-${lbId} .vc{position:fixed;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;z-index:100000;opacity:.8}
+.vlb-${lbId} .vc:hover{opacity:1}
+.vlb-${lbId} .vx{top:16px;right:20px}
+.vlb-${lbId} .vp{top:50%;transform:translateY(-50%);left:8px}
+.vlb-${lbId} .vn{top:50%;transform:translateY(-50%);right:8px}
+@media(max-width:600px){.gt-${lbId} figure{flex:0 0 calc(33.33% - 4px) !important}}
+</style>
+<div class="gt-${lbId}" style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 24px">
+${items}
+</div>
+<div class="vlb-${lbId}" id="vlb-${lbId}">
+  <button class="vc vx" onclick="document.getElementById('vlb-${lbId}').classList.remove('open');document.body.style.overflow=''">&#10005;</button>
+  <button class="vc vp" id="vp-${lbId}">&#8249;</button>
+  <img id="vi-${lbId}" src="" alt="" />
+  <button class="vc vn" id="vn-${lbId}">&#8250;</button>
+</div>
+<script>
+(function(){var I=${imgsJson},c=0,b=document.getElementById('vlb-${lbId}');
+function s(i){c=(i+I.length)%I.length;document.getElementById('vi-${lbId}').src=I[c].url;document.getElementById('vi-${lbId}').alt=I[c].alt;}
+function o(i){b.classList.add('open');document.body.style.overflow='hidden';s(i);}
+document.getElementById('vp-${lbId}').onclick=function(){s(c-1);};
+document.getElementById('vn-${lbId}').onclick=function(){s(c+1);};
+b.onclick=function(e){if(e.target===b){b.classList.remove('open');document.body.style.overflow='';}};
+document.addEventListener('click',function(e){var a=e.target.closest('[data-vlb="${lbId}"]');if(a){e.preventDefault();o(parseInt(a.dataset.idx)||0);}});
+document.addEventListener('keydown',function(e){if(!b.classList.contains('open'))return;if(e.key==='ArrowRight')s(c+1);if(e.key==='ArrowLeft')s(c-1);if(e.key==='Escape'){b.classList.remove('open');document.body.style.overflow='';}});
+})();
+</script>`;
+}
+
+// ---------------------------------------------------------------------------
+// 7. BREADCRUMB (visível + schema BreadcrumbList)
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// TABELA DE APLICABILIDADE (inserida após "O que avaliamos")
+// ---------------------------------------------------------------------------
+function montarTabelaAplicabilidade(servico) {
+  const tabelas = {
+    "laudo-demanda-eletrica": [
+      ["Contratação de nova ligação elétrica", "ANEEL / concessionária", "Obrigatório"],
+      ["Adequação de demanda contratada", "ANEEL Resolução 414", "Obrigatório"],
+      ["Empresas com consumo acima de 75 kW", "ANEEL / NR-10", "Obrigatório"],
+      ["Expansão de capacidade instalada", "NBR 5410", "Recomendado"],
+    ],
+    "laudo-nr10": [
+      ["Trabalhadores em instalações elétricas", "NR-10 item 10.8", "Obrigatório"],
+      ["Prontuário das instalações elétricas", "NR-10 item 10.2.4", "Obrigatório"],
+      ["Empresas com geração própria de energia", "NR-10 Seção II", "Obrigatório"],
+      ["Manutenção em alta tensão", "NR-10 item 10.9", "Obrigatório"],
+    ],
+    "estudo-de-cargas-eletricas": [
+      ["Projeto de instalação residencial nova", "NBR 5410", "Obrigatório"],
+      ["Reforma com aumento de carga", "NBR 5410", "Obrigatório"],
+      ["Dimensionamento de equipamentos industriais", "NBR 5462", "Recomendado"],
+      ["Edificações multifamiliares", "NBR 5410 + ABNT", "Obrigatório"],
+    ],
+    "spda-para-raios": [
+      ["Edificações acima de 5 andares", "NBR 5419", "Obrigatório"],
+      ["Estruturas com área superior a 250 m²", "NBR 5419", "Análise de risco"],
+      ["Indústrias e áreas classificadas", "NBR 5419 + NR-10", "Obrigatório"],
+      ["Instalações com equipamentos sensíveis", "NBR 5419", "Recomendado"],
+    ],
+  };
+  const linhas = tabelas[servico.id] || [
+    ["Instalações residenciais e comerciais novas", "NBR 5410", "Obrigatório"],
+    ["Reformas e adequações elétricas", "NBR 5410 / ABNT", "Obrigatório"],
+    ["Fiscalização técnica", "CREA-SP / ART", "Recomendado"],
+    ["Regularização junto a órgãos", "Concessionária / Bombeiros", "Situacional"],
+  ];
+  return `<h2>Quando o serviço é obrigatório ou recomendado</h2>
+<table>
+<thead><tr><th>Situação</th><th>Base legal / norma</th><th>Exigência</th></tr></thead>
+<tbody>
+${linhas.map(([s, b, e]) => `<tr><td>${s}</td><td>${b}</td><td>${e}</td></tr>`).join("\n")}
+</tbody></table>
+<p>Todos os laudos incluem Anotação de Responsabilidade Técnica (ART) registrada no CREA-SP, com validade jurídica para concessionárias, prefeitura, Corpo de Bombeiros e demais órgãos.</p>`;
+}
+
 function montarBreadcrumbHtml({ servico, localidade, tituloPagina }) {
   return `<nav class="instel-breadcrumb" aria-label="breadcrumb" style="font-size:14px;color:#666;margin-bottom:16px;">
   <a href="${escapeHtml(CONFIG.empresaUrl)}">Home</a> &raquo;
@@ -486,8 +382,25 @@ function montarBreadcrumbHtml({ servico, localidade, tituloPagina }) {
 </nav>`;
 }
 
+function montarSchemaBreadcrumb({ tituloPagina }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: CONFIG.empresaUrl },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Serviços",
+        item: `${CONFIG.empresaUrl}/servicos/`,
+      },
+      { "@type": "ListItem", position: 3, name: tituloPagina },
+    ],
+  };
+}
+
 // ---------------------------------------------------------------------------
-// 11. BLOCOS FIXOS (CTA, orçamento, box autor)
+// 8. BLOCOS FIXOS (CTA WhatsApp, orçamento, box de autor) — não dependem da IA
 // ---------------------------------------------------------------------------
 function montarCtaWhatsapp({ servico, localidade, variante }) {
   const mensagem =
@@ -501,112 +414,75 @@ function montarCtaWhatsapp({ servico, localidade, variante }) {
   const pergunta =
     variante === "meio"
       ? `<strong>Precisa de ${escapeHtml(servico.nome)} em ${escapeHtml(localidade.nome)}?</strong> Fale agora com ${escapeHtml(CONFIG.responsavelNome)} pelo WhatsApp.`
-      : `<strong>Pronto para solicitar ${escapeHtml(servico.nome)} em ${escapeHtml(localidade.nome)}?</strong> Entre em contato sem compromisso.`;
+      : `<strong>Pronto para agendar ${escapeHtml(servico.nome)} em ${escapeHtml(localidade.nome)}?</strong> Solicite um orçamento sem compromisso.`;
 
-  return `<div class="instel-cta-wp" style="background:#f0f7ff;border-left:4px solid #0066cc;padding:16px 20px;margin:24px 0;border-radius:4px;">
-<p style="margin:0 0 10px;">${pergunta}</p>
-<a href="${montarLinkWhatsapp(mensagem)}" target="_blank" rel="noopener" style="display:inline-block;background:#25d366;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-weight:bold;">${textoBotao}</a>
-</div>`;
+  return `<p>${pergunta}</p>
+<p><a href="${montarLinkWhatsapp(mensagem)}" target="_blank" rel="noopener">${textoBotao}</a></p>`;
 }
 
 function montarBlocoOrcamento() {
-  return `<p><strong>Investimento:</strong> os valores variam conforme o escopo e as características da instalação — <a href="${escapeHtml(CONFIG.empresaUrl)}/contato">solicite um orçamento personalizado</a> (a consultar).</p>`;
+  return `<p><strong>Investimento:</strong> os valores variam conforme o escopo e as características do imóvel ou empresa — <a href="${escapeHtml(
+    CONFIG.empresaUrl
+  )}/contato">solicite um orçamento personalizado</a> (a consultar).</p>`;
 }
 
 function montarBoxAutor() {
-  return `<div class="instel-box-autor" style="margin-top:40px;padding:20px;border:1px solid #e0e0e0;border-radius:8px;background:#fafafa;">
-  <p style="margin:0 0 4px;font-weight:bold;"><a href="${escapeHtml(CONFIG.responsavelUrlPerfil)}">${escapeHtml(CONFIG.responsavelNome)}</a></p>
+  return `
+<div class="instel-box-autor" style="margin-top:40px;padding:20px;border:1px solid #e0e0e0;border-radius:8px;background:#fafafa;">
+  <p style="margin:0 0 6px;font-weight:bold;">
+    <a href="${escapeHtml(CONFIG.responsavelUrlPerfil)}">${escapeHtml(CONFIG.responsavelNome)}</a>
+  </p>
   <p style="margin:0 0 6px;color:#555;">${escapeHtml(CONFIG.responsavelCredencial)}</p>
   <p style="margin:0;color:#555;">${escapeHtml(CONFIG.responsavelBio)}</p>
-</div>`;
+</div>`.trim();
 }
 
 // ---------------------------------------------------------------------------
-// 12. SCHEMAS JSON-LD (FAQPage + Service + LocalBusiness + Person + Breadcrumb)
+// 9. SCHEMAS JSON-LD (FAQPage + Service/LocalBusiness + BreadcrumbList)
 // ---------------------------------------------------------------------------
-function montarSchemas({ servico, localidade, faq, tituloPagina }) {
+function montarSchemaFaqPage(faq) {
+  if (!faq || faq.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: item.resposta },
+    })),
+  };
+}
+
+function montarSchemaService({ servico, localidade }) {
   const areaServida =
     localidade.tipo === "bairro" ? `${localidade.nome}, São Paulo, SP` : `${localidade.nome}, SP`;
 
-  const schemas = [
-    // BreadcrumbList
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: CONFIG.empresaUrl },
-        { "@type": "ListItem", position: 2, name: "Serviços", item: `${CONFIG.empresaUrl}/servicos/` },
-        { "@type": "ListItem", position: 3, name: tituloPagina },
-      ],
-    },
-    // FAQPage
-    faq && faq.length > 0 && {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faq.map((item) => ({
-        "@type": "Question",
-        name: item.pergunta,
-        acceptedAnswer: { "@type": "Answer", text: item.resposta },
-      })),
-    },
-    // Service
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: servico.nome,
-      provider: {
-        "@type": "LocalBusiness",
-        name: CONFIG.empresaNome,
-        url: CONFIG.empresaUrl,
-        telephone: CONFIG.whatsapp,
-      },
-      areaServed: { "@type": "Place", name: areaServida },
-      description: servico.descricaoCurta,
-    },
-    // LocalBusiness
-    {
-      "@context": "https://schema.org",
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: servico.nome,
+    provider: {
       "@type": "LocalBusiness",
       name: CONFIG.empresaNome,
       url: CONFIG.empresaUrl,
       telephone: CONFIG.whatsapp,
       email: CONFIG.email,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "São Paulo",
-        addressRegion: "SP",
-        addressCountry: "BR",
-      },
-      areaServed: { "@type": "Place", name: areaServida },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Serviços de Engenharia Elétrica",
-        itemListElement: [{
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: `${servico.nome} em ${localidade.nome}` },
-        }],
-      },
     },
-    // Person
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: CONFIG.responsavelNome,
-      jobTitle: "Engenheiro Eletricista",
-      hasCredential: "CREA-SP 5071122659",
-      url: CONFIG.responsavelUrlPerfil,
-      worksFor: { "@type": "Organization", name: CONFIG.empresaNome },
-      description: CONFIG.responsavelBio,
-    },
-  ].filter(Boolean);
+    areaServed: { "@type": "Place", name: areaServida },
+    description: servico.descricaoCurta,
+  };
+}
 
+function montarScriptsJsonLd(schemas) {
   return schemas
-    .map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`)
+    .filter(Boolean)
+    .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema)}</script>`)
     .join("\n");
 }
 
 // ---------------------------------------------------------------------------
-// 13. TAGS E POSTS RELACIONADOS (WordPress)
+// 10. TAGS DO WORDPRESS + "SERVIÇOS RELACIONADOS" (internal linking real,
+//     sem links quebrados: só lista posts que já existem de fato)
 // ---------------------------------------------------------------------------
 function authHeaderWp() {
   const auth = Buffer.from(`${CONFIG.wpUser}:${CONFIG.wpAppPassword}`).toString("base64");
@@ -616,7 +492,9 @@ function authHeaderWp() {
 async function buscarOuCriarTag(nome) {
   const buscaUrl = `${CONFIG.wpUrl}/wp-json/wp/v2/tags?search=${encodeURIComponent(nome)}&per_page=10`;
   const respostaBusca = await fetch(buscaUrl, { headers: authHeaderWp() });
-  if (!respostaBusca.ok) throw new Error(`Erro ao buscar tag "${nome}" (${respostaBusca.status})`);
+  if (!respostaBusca.ok) {
+    throw new Error(`Erro ao buscar tag "${nome}" (${respostaBusca.status})`);
+  }
   const encontradas = await respostaBusca.json();
   const exata = encontradas.find((t) => t.name.toLowerCase() === nome.toLowerCase());
   if (exata) return exata.id;
@@ -627,23 +505,28 @@ async function buscarOuCriarTag(nome) {
     body: JSON.stringify({ name: nome, slug: slugify(nome) }),
   });
   if (!respostaCriacao.ok) {
-    const seg = await fetch(buscaUrl, { headers: authHeaderWp() });
-    const lista = seg.ok ? await seg.json() : [];
-    const achou = lista.find((t) => t.name.toLowerCase() === nome.toLowerCase());
+    // Pode falhar por concorrência (outra execução criou a tag ao mesmo tempo) — tenta buscar de novo.
+    const segundaBusca = await fetch(buscaUrl, { headers: authHeaderWp() });
+    const segundaLista = segundaBusca.ok ? await segundaBusca.json() : [];
+    const achou = segundaLista.find((t) => t.name.toLowerCase() === nome.toLowerCase());
     if (achou) return achou.id;
-    throw new Error(`Erro ao criar tag "${nome}" (${respostaCriacao.status})`);
+    const corpoErro = await respostaCriacao.text();
+    throw new Error(`Erro ao criar tag "${nome}" (${respostaCriacao.status}): ${corpoErro}`);
   }
-  return (await respostaCriacao.json()).id;
+  const criada = await respostaCriacao.json();
+  return criada.id;
 }
 
 async function buscarPostsRelacionados({ tagServicoId, tagLocalidadeAtualId }) {
   const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?tags=${tagServicoId}&per_page=10&_fields=id,title,link,tags`;
   const resposta = await fetch(url, { headers: authHeaderWp() });
-  if (!resposta.ok) return [];
+  if (!resposta.ok) return []; // não trava a publicação por causa do link building
+
   const posts = await resposta.json();
   const relacionados = posts.filter((p) => !p.tags?.includes(tagLocalidadeAtualId));
+
   if (relacionados.length < CONFIG.minRelacionadosParaExibir) return [];
-  return relacionados.slice(0, 6).map((p) => ({ titulo: p.title.rendered, link: p.link }));
+  return relacionados.slice(0, 5).map((p) => ({ titulo: p.title.rendered, link: p.link }));
 }
 
 function montarSecaoRelacionados(relacionados, { servico, localidade }) {
@@ -652,16 +535,21 @@ function montarSecaoRelacionados(relacionados, { servico, localidade }) {
     .map((r) => `<li><a href="${escapeHtml(r.link)}">${r.titulo}</a></li>`)
     .join("\n");
   return `<h2>Serviços relacionados em ${escapeHtml(localidade.nome)} e região</h2>
-<ul>${itens}</ul>`;
+<ul>
+${itens}
+</ul>`;
 }
 
 // ---------------------------------------------------------------------------
-// 14. MONTAGEM DO HTML FINAL
+// 11. MONTAGEM DO HTML FINAL (junta tudo na ordem da estrutura de referência)
 // ---------------------------------------------------------------------------
 function montarSecaoComItens(secao) {
   if (!secao) return "";
   const itensHtml = (secao.itens || [])
-    .map((item) => `<h3>${escapeHtml(item.tituloH3)}</h3>\n${removerHeadingsIndevidos(item.html)}`)
+    .map(
+      (item) =>
+        `<h3>${escapeHtml(item.tituloH3)}</h3>\n${removerHeadingsIndevidos(item.html)}`
+    )
     .join("\n");
   return `<h2>${escapeHtml(secao.tituloH2)}</h2>\n${itensHtml}`;
 }
@@ -680,14 +568,19 @@ ${removerHeadingsIndevidos(b.html)}`;
 function montarSecaoFaq(faq, { servico, localidade }) {
   if (!faq || faq.length === 0) return "";
   const itens = faq
-    .map((item) => `<h3>${escapeHtml(item.pergunta)}</h3>\n<p>${escapeHtml(item.resposta)}</p>`)
+    .map(
+      (item) =>
+        `<h3>${escapeHtml(item.pergunta)}</h3>\n<p>${escapeHtml(item.resposta)}</p>`
+    )
     .join("\n");
-  return `<h2>Perguntas frequentes sobre ${escapeHtml(servico.nome)} em ${escapeHtml(localidade.nome)}</h2>\n${itens}`;
+  return `<h2>Perguntas frequentes sobre ${escapeHtml(servico.nome)} em ${escapeHtml(
+    localidade.nome
+  )}</h2>
+${itens}`;
 }
 
 export function montarHtmlFinal({ conteudo, servico, localidade, listaImagens, relacionados, tituloPagina }) {
   const blocos = [
-    montarSchemas({ servico, localidade, faq: conteudo.faq, tituloPagina }),
     montarBreadcrumbHtml({ servico, localidade, tituloPagina }),
     montarGaleria(listaImagens, { servico, localidade }),
     removerHeadingsIndevidos(conteudo.introducaoHtml),
@@ -702,12 +595,27 @@ export function montarHtmlFinal({ conteudo, servico, localidade, listaImagens, r
     montarBlocoOrcamento(),
     montarSecaoRelacionados(relacionados, { servico, localidade }),
     montarBoxAutor(),
+    montarScriptsJsonLd([
+      montarSchemaBreadcrumb({ tituloPagina }),
+      montarSchemaFaqPage(conteudo.faq),
+      montarSchemaService({ servico, localidade }),
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: CONFIG.responsavelNome,
+        jobTitle: "Engenheiro Eletricista",
+        hasCredential: CONFIG.responsavelCredencial,
+        url: CONFIG.responsavelUrlPerfil,
+        worksFor: { "@type": "Organization", name: CONFIG.empresaNome, url: CONFIG.empresaUrl },
+      },
+    ]),
   ];
-  return blocos.filter((b) => b && b.trim().length > 0).join("\n\n");
+
+  return blocos.filter((bloco) => bloco && bloco.trim().length > 0).join("\n\n");
 }
 
 // ---------------------------------------------------------------------------
-// 15. PUBLICAÇÃO NO WORDPRESS
+// 12. PUBLICAÇÃO NO WORDPRESS (REST API + Application Password)
 // ---------------------------------------------------------------------------
 async function publicarNoWordpress({ titulo, metaDescricao, htmlFinal, tagIds }) {
   const resposta = await fetch(`${CONFIG.wpUrl}/wp-json/wp/v2/posts`, {
@@ -721,40 +629,40 @@ async function publicarNoWordpress({ titulo, metaDescricao, htmlFinal, tagIds })
       tags: tagIds,
     }),
   });
+
   if (!resposta.ok) {
     const corpoErro = await resposta.text();
     throw new Error(`Erro ao publicar no WordPress (${resposta.status}): ${corpoErro}`);
   }
+
   return resposta.json();
 }
 
 // ---------------------------------------------------------------------------
-// 16. ORQUESTRAÇÃO PRINCIPAL
+// 13. ORQUESTRAÇÃO PRINCIPAL
 // ---------------------------------------------------------------------------
 async function main() {
-  console.log(`🚀 Instel Service SEO Pipeline v2 — ${new Date().toISOString()}`);
-
-  // Bootstrap de imagens (faz upload para WP se arquivos existirem em ./imagens/)
-  const imagensWP = await bootstrapImagens();
+  console.log(`Iniciando geração de ${CONFIG.postsPorDia} post(s) para ${CONFIG.empresaNome}...`);
 
   const dados = await carregarDados();
   const combinacoes = gerarCombinacoesDoDia(dados);
-  console.log(`📋 ${dados.servicos.length} serviços × ${dados.localidades.length} localidades = ${dados.servicos.length * dados.localidades.length} combinações possíveis`);
+
+  console.log(`Total de combinações possíveis: ${dados.servicos.length * dados.localidades.length}`);
 
   const resultados = [];
 
+  // Processado sequencialmente (não em paralelo) para evitar rate limit
+  // na OpenAI e excesso de chamadas simultâneas na API do WordPress.
   for (const combinacao of combinacoes) {
-    const { servico, localidade, indiceGlobal, postIndex } = combinacao;
+    const { servico, localidade, indiceGlobal } = combinacao;
     const rotulo = `[${indiceGlobal}] ${servico.nome} × ${localidade.nome}`;
 
     try {
-      console.log(`\n📝 Gerando: ${rotulo}`);
-
-      console.log("  → Conteúdo via IA...");
+      console.log(`Gerando conteúdo: ${rotulo}`);
       const conteudo = await gerarConteudoComIA({ servico, localidade });
       const tituloPagina = conteudo.titulo;
 
-      console.log("  → Tags no WordPress...");
+      console.log(`Resolvendo tags no WordPress: ${rotulo}`);
       const tagServicoId = await buscarOuCriarTag(servico.nome);
       const tagLocalidadeId = await buscarOuCriarTag(localidade.nome);
 
@@ -763,7 +671,7 @@ async function main() {
         tagLocalidadeAtualId: tagLocalidadeId,
       });
 
-      const listaImagens = selecionarImagens(imagensWP, postIndex);
+      const listaImagens = obterImagensDoServico(dados.imagens, servico);
 
       const htmlFinal = montarHtmlFinal({
         conteudo,
@@ -774,7 +682,7 @@ async function main() {
         tituloPagina,
       });
 
-      console.log("  → Publicando...");
+      console.log(`Publicando no WordPress: ${rotulo}`);
       const post = await publicarNoWordpress({
         titulo: tituloPagina,
         metaDescricao: conteudo.metaDescricao,
@@ -782,25 +690,26 @@ async function main() {
         tagIds: [tagServicoId, tagLocalidadeId],
       });
 
-      console.log(`  ✅ ID ${post.id} — ${post.link || ""}`);
+      console.log(`OK -> Post publicado: ${post.link || post.id}`);
       resultados.push({ rotulo, sucesso: true, postId: post.id, link: post.link });
     } catch (erro) {
-      console.error(`  ❌ FALHOU — ${rotulo}: ${erro.message}`);
+      console.error(`FALHOU -> ${rotulo}: ${erro.message}`);
       resultados.push({ rotulo, sucesso: false, erro: erro.message });
     }
   }
 
   const falhas = resultados.filter((r) => !r.sucesso);
-  console.log(`\n✅ Resumo: ${resultados.length - falhas.length} ok, ${falhas.length} falha(s).`);
+  console.log(`\nResumo: ${resultados.length - falhas.length} ok, ${falhas.length} falha(s).`);
+
   if (falhas.length > 0) {
-    console.error("Falhas:", JSON.stringify(falhas, null, 2));
-    process.exitCode = 1;
+    console.error("Combinações que falharam:", JSON.stringify(falhas, null, 2));
+    process.exitCode = 1; // marca o workflow como falho para alertar (sem travar os que deram certo)
   }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((erro) => {
-    console.error("Erro fatal:", erro);
+    console.error("Erro fatal no pipeline:", erro);
     process.exit(1);
   });
 }
