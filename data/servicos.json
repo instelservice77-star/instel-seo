@@ -1,1 +1,52 @@
-
+[
+  {
+    "id": "estudo-de-cargas-eletricas",
+    "nome": "Estudo de Cargas Elétricas",
+    "descricaoCurta": "levantamento e dimensionamento das cargas elétricas instaladas e previstas em uma edificação"
+  },
+  {
+    "id": "estudo-de-demanda",
+    "nome": "Estudo de Demanda Elétrica",
+    "descricaoCurta": "cálculo da demanda contratada junto à concessionária de energia, evitando multas por excesso ou contratação acima do necessário"
+  },
+  {
+    "id": "estudo-para-instalacao-de-carregadores-eletricos",
+    "nome": "Estudo para Instalação de Carregadores Elétricos Veiculares",
+    "descricaoCurta": "análise técnica de viabilidade elétrica para instalação de pontos de recarga de veículos elétricos (EV)"
+  },
+  {
+    "id": "estudo-de-curva-de-carga-avcb",
+    "nome": "Estudo de Curva de Carga para AVCB",
+    "descricaoCurta": "levantamento da curva de carga elétrica exigido para emissão do Auto de Vistoria do Corpo de Bombeiros"
+  },
+  {
+    "id": "estudo-de-viabilidade-eletrica",
+    "nome": "Estudo de Viabilidade Elétrica",
+    "descricaoCurta": "análise preliminar da capacidade da rede e da infraestrutura elétrica disponível para um novo projeto ou ampliação"
+  },
+  {
+    "id": "laudo-de-instalacoes-eletricas",
+    "nome": "Laudo de Instalações Elétricas",
+    "descricaoCurta": "vistoria técnica e emissão de laudo sobre as condições de segurança das instalações elétricas de um imóvel"
+  },
+  {
+    "id": "laudo-nr10",
+    "nome": "Laudo NR10",
+    "descricaoCurta": "laudo de conformidade com a Norma Regulamentadora 10, sobre segurança em instalações e serviços em eletricidade"
+  },
+  {
+    "id": "projetos-unifilares",
+    "nome": "Projetos Unifilares",
+    "descricaoCurta": "elaboração de diagramas unifilares para regularização, ampliação ou nova ligação de energia"
+  },
+  {
+    "id": "consultoria-eletrica",
+    "nome": "Consultoria Elétrica",
+    "descricaoCurta": "assessoria técnica especializada em engenharia elétrica para empresas, condomínios e indústrias"
+  },
+  {
+    "id": "laudo-eletrico-avcb",
+    "nome": "Laudo Elétrico para AVCB",
+    "descricaoCurta": "laudo técnico elétrico exigido pelo Corpo de Bombeiros para emissão ou renovação do AVCB"
+  }
+]
