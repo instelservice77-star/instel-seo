@@ -5,7 +5,9 @@
 // GEO/AIO (ser entendido e reutilizado por LLMs) + SXO (conversão real via WhatsApp).
 // Roda via GitHub Actions (Node 20+, fetch nativo, sem dependências externas).
 
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import https from "node:https";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -69,13 +71,101 @@ async function carregarJson(nomeArquivo, fallback) {
   }
 }
 
+// Metadados das imagens do repositório
+const IMAGENS_REPO = [
+  { arquivo: "art-eletrica-01.webp", alt: "engenheiro elétrico realizando inspeção técnica em instalação de baixa tensão" },
+  { arquivo: "art-eletrica-02.webp", alt: "laudo elétrico com ART do CREA-SP e assinatura de engenheiro responsável" },
+  { arquivo: "art-eletrica-03.webp", alt: "painel elétrico com disjuntores identificados em vistoria técnica" },
+  { arquivo: "art-instalacoes-eletricas-01.webp", alt: "instalação elétrica residencial com fiação organizada e identificada" },
+  { arquivo: "art-instalacoes-eletricas-02.webp", alt: "quadro de distribuição elétrica sendo inspecionado por engenheiro" },
+  { arquivo: "art-instalacoes-eletricas-03.webp", alt: "medição elétrica com equipamentos técnicos em instalação comercial" },
+  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-01.webp", alt: "consultoria elétrica para adequação NR-10 em empresa em São Paulo" },
+  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-02.webp", alt: "engenheiro realizando diagnóstico elétrico para adequação à NR-10" },
+  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-01.webp", alt: "laudo técnico elétrico sendo elaborado por engenheiro CREA-SP" },
+  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-02.webp", alt: "relatório técnico de instalação elétrica com fotos e recomendações" },
+];
+
+function httpPost(hostname, path_, headers, body) {
+  return new Promise((resolve, reject) => {
+    const req = https.request({ hostname, path: path_, method: "POST", headers }, (res) => {
+      const chunks = [];
+      res.on("data", c => chunks.push(c));
+      res.on("end", () => {
+        const data = Buffer.concat(chunks);
+        try { resolve({ status: res.statusCode, body: JSON.parse(data.toString()) }); }
+        catch { resolve({ status: res.statusCode, body: data.toString() }); }
+      });
+    });
+    req.on("error", reject);
+    if (body) req.write(body);
+    req.end();
+  });
+}
+
+async function bootstrapImagens() {
+  // Cache em /tmp para não re-fazer upload a cada run
+  const cacheFile = "/tmp/instel-imagens-wp.json";
+  try {
+    const cache = JSON.parse(await readFile(cacheFile, "utf-8"));
+    if (Array.isArray(cache) && cache.length === IMAGENS_REPO.length && cache.some(i => i.url)) {
+      console.log(`📸 ${cache.filter(i=>i.url).length} imagens no cache`);
+      return cache;
+    }
+  } catch { /* sem cache */ }
+
+  console.log("📸 Fazendo upload das imagens para o WordPress...");
+  const wpHost = new URL(CONFIG.wpUrl).hostname;
+  const wpAuth = "Basic " + Buffer.from(`${CONFIG.wpUser}:${CONFIG.wpAppPassword}`).toString("base64");
+  const uploaded = [];
+
+  for (const meta of IMAGENS_REPO) {
+    const imgPath = path.join(__dirname, "..", "imagens", meta.arquivo);
+    if (!existsSync(imgPath)) {
+      console.log(`  ⚠️  ${meta.arquivo} não encontrado`);
+      uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
+      continue;
+    }
+    const imgData = await readFile(imgPath);
+    try {
+      const res = await httpPost(wpHost, "/wp-json/wp/v2/media", {
+        Authorization: wpAuth,
+        "Content-Type": "image/webp",
+        "Content-Disposition": `attachment; filename="${meta.arquivo}"`,
+        "Content-Length": imgData.length,
+      }, imgData);
+      if (res.body?.id) {
+        uploaded.push({ arquivo: meta.arquivo, url: res.body.source_url, id: res.body.id, alt: meta.alt });
+        console.log(`  ✅ ${meta.arquivo} → ${res.body.source_url}`);
+      } else {
+        uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
+        console.log(`  ❌ ${meta.arquivo}: ${JSON.stringify(res.body).slice(0, 80)}`);
+      }
+    } catch (e) {
+      uploaded.push({ arquivo: meta.arquivo, url: null, id: null, alt: meta.alt });
+      console.log(`  ❌ ${meta.arquivo}: ${e.message}`);
+    }
+    await new Promise(r => setTimeout(r, 400));
+  }
+  await writeFile(cacheFile, JSON.stringify(uploaded, null, 2));
+  console.log(`📸 ${uploaded.filter(i=>i.url).length}/${IMAGENS_REPO.length} imagens prontas`);
+  return uploaded;
+}
+
+function selecionarImagens(imagensWP, postIndex) {
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const seed = dayOfYear * CONFIG.postsPorDia + postIndex;
+  const disponiveis = imagensWP.filter(i => i.url);
+  if (disponiveis.length === 0) return [];
+  return Array.from({length: Math.min(5, disponiveis.length)}, (_, i) => disponiveis[(seed + i * 7) % disponiveis.length]);
+}
+
 async function carregarDados() {
-  const [servicos, localidades, imagens] = await Promise.all([
+  const [servicos, localidades] = await Promise.all([
     carregarJson("servicos.json"),
     carregarJson("localidades.json"),
-    carregarJson("imagens.json", {}), // opcional — ver README sobre como preencher
   ]);
-  return { servicos, localidades, imagens };
+  return { servicos, localidades };
 }
 
 // ---------------------------------------------------------------------------
@@ -489,6 +579,21 @@ function authHeaderWp() {
   return { Authorization: `Basic ${auth}` };
 }
 
+
+// Verifica se já existe post com esse título (evita duplicatas em múltiplos runs no mesmo dia)
+async function tituloJaExiste(titulo) {
+  try {
+    const encoded = encodeURIComponent(titulo.replace(/<[^>]+>/g, '').trim());
+    const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?search=${encoded}&per_page=5&status=any&_fields=id,title,status`;
+    const r = await fetch(url, { headers: authHeaderWp() });
+    if (!r.ok) return false;
+    const posts = await r.json();
+    if (!Array.isArray(posts)) return false;
+    const tituloLimpo = titulo.replace(/<[^>]+>/g, '').trim().toLowerCase();
+    return posts.some(p => (p.title?.rendered || '').replace(/<[^>]+>/g, '').trim().toLowerCase() === tituloLimpo);
+  } catch { return false; }
+}
+
 async function buscarOuCriarTag(nome) {
   const buscaUrl = `${CONFIG.wpUrl}/wp-json/wp/v2/tags?search=${encodeURIComponent(nome)}&per_page=10`;
   const respostaBusca = await fetch(buscaUrl, { headers: authHeaderWp() });
@@ -518,15 +623,24 @@ async function buscarOuCriarTag(nome) {
 }
 
 async function buscarPostsRelacionados({ tagServicoId, tagLocalidadeAtualId }) {
-  const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?tags=${tagServicoId}&per_page=10&_fields=id,title,link,tags`;
+  const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?tags=${tagServicoId}&per_page=20&_fields=id,title,link,tags`;
   const resposta = await fetch(url, { headers: authHeaderWp() });
-  if (!resposta.ok) return []; // não trava a publicação por causa do link building
+  if (!resposta.ok) return [];
 
   const posts = await resposta.json();
   const relacionados = posts.filter((p) => !p.tags?.includes(tagLocalidadeAtualId));
 
-  if (relacionados.length < CONFIG.minRelacionadosParaExibir) return [];
-  return relacionados.slice(0, 5).map((p) => ({ titulo: p.title.rendered, link: p.link }));
+  // Deduplicar por título (remove duplicatas de múltiplos runs)
+  const vistos = new Set();
+  const unicos = relacionados.filter(p => {
+    const titulo = (p.title?.rendered || '').replace(/<[^>]+>/g, '').trim().toLowerCase();
+    if (vistos.has(titulo)) return false;
+    vistos.add(titulo);
+    return true;
+  });
+
+  if (unicos.length < CONFIG.minRelacionadosParaExibir) return [];
+  return unicos.slice(0, 6).map((p) => ({ titulo: p.title.rendered, link: p.link }));
 }
 
 function montarSecaoRelacionados(relacionados, { servico, localidade }) {
@@ -642,7 +756,10 @@ async function publicarNoWordpress({ titulo, metaDescricao, htmlFinal, tagIds })
 // 13. ORQUESTRAÇÃO PRINCIPAL
 // ---------------------------------------------------------------------------
 async function main() {
-  console.log(`Iniciando geração de ${CONFIG.postsPorDia} post(s) para ${CONFIG.empresaNome}...`);
+  console.log(`🚀 Instel SEO v3 — ${new Date().toISOString()}`);
+
+  // Bootstrap: sobe imagens ao WP na 1ª execução, usa cache nas seguintes
+  const imagensWP = await bootstrapImagens();
 
   const dados = await carregarDados();
   const combinacoes = gerarCombinacoesDoDia(dados);
@@ -653,7 +770,8 @@ async function main() {
 
   // Processado sequencialmente (não em paralelo) para evitar rate limit
   // na OpenAI e excesso de chamadas simultâneas na API do WordPress.
-  for (const combinacao of combinacoes) {
+  for (let i = 0; i < combinacoes.length; i++) {
+    const combinacao = combinacoes[i];
     const { servico, localidade, indiceGlobal } = combinacao;
     const rotulo = `[${indiceGlobal}] ${servico.nome} × ${localidade.nome}`;
 
@@ -661,6 +779,13 @@ async function main() {
       console.log(`Gerando conteúdo: ${rotulo}`);
       const conteudo = await gerarConteudoComIA({ servico, localidade });
       const tituloPagina = conteudo.titulo;
+
+      // Evitar duplicatas: pular se já existe post com esse título
+      if (await tituloJaExiste(tituloPagina)) {
+        console.log(`Duplicata detectada, pulando: ${tituloPagina}`);
+        resultados.push({ rotulo, sucesso: true, postId: null, link: null });
+        continue;
+      }
 
       console.log(`Resolvendo tags no WordPress: ${rotulo}`);
       const tagServicoId = await buscarOuCriarTag(servico.nome);
@@ -671,7 +796,7 @@ async function main() {
         tagLocalidadeAtualId: tagLocalidadeId,
       });
 
-      const listaImagens = obterImagensDoServico(dados.imagens, servico);
+      const listaImagens = selecionarImagens(imagensWP, i);
 
       const htmlFinal = montarHtmlFinal({
         conteudo,
@@ -713,4 +838,5 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(1);
   });
 }
+
 
