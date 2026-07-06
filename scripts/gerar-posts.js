@@ -3,9 +3,8 @@
 // tabela de obrigatoriedade no conteúdo, schemas Person + LocalBusiness,
 // prompt enriquecido com contexto por localidade.
 
-import { readFile, writeFile, existsSync } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { existsSync as existsSync_ } from "node:fs";
-import { createReadStream } from "node:fs";
 import https from "node:https";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
