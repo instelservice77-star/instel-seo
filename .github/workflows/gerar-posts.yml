@@ -1,0 +1,52 @@
+name: Gerar e Publicar Posts SEO
+
+on:
+  workflow_dispatch:
+    inputs:
+      indice_forcado:
+        description: "Forçar um índice inicial específico (opcional, para testes)"
+        required: false
+        default: ""
+
+  schedule:
+    # 09:00 horário de São Paulo (UTC-3) = 12:00 UTC.
+    # Ajuste se o horário de verão/padrão mudar ou se quiser outro horário.
+    - cron: "0 12 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  gerar-posts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Executar pipeline de geração e publicação
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_STATUS: ${{ secrets.WP_STATUS }}
+          EMPRESA_NOME: ${{ secrets.EMPRESA_NOME }}
+          EMPRESA_URL: ${{ secrets.EMPRESA_URL }}
+          RESPONSAVEL_NOME: ${{ secrets.RESPONSAVEL_NOME }}
+          RESPONSAVEL_CREDENCIAL: ${{ secrets.RESPONSAVEL_CREDENCIAL }}
+          RESPONSAVEL_BIO: ${{ secrets.RESPONSAVEL_BIO }}
+          RESPONSAVEL_URL_PERFIL: ${{ secrets.RESPONSAVEL_URL_PERFIL }}
+          WP_WHATSAPP: ${{ secrets.WP_WHATSAPP }}
+          WP_WHATSAPP_LINK: ${{ secrets.WP_WHATSAPP_LINK }}
+          WP_EMAIL: ${{ secrets.WP_EMAIL }}
+          POSTS_POR_DIA: ${{ secrets.POSTS_POR_DIA }}
+          MIN_RELACIONADOS: ${{ secrets.MIN_RELACIONADOS }}
+          INDICE_FORCADO: ${{ github.event.inputs.indice_forcado }}
+        run: node scripts/gerar-posts.js
