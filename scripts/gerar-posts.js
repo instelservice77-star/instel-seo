@@ -401,16 +401,23 @@ ${items}
   <button class="vc vp" id="vp-${lbId}">&#8249;</button>
   <img id="vi-${lbId}" src="" alt="" />
   <button class="vc vn" id="vn-${lbId}">&#8250;</button>
+  <div id="vt-${lbId}" style="color:rgba(255,255,255,.65);font-size:13px;margin-top:8px;font-family:sans-serif;"></div>
+  <div id="vc-${lbId}" style="color:rgba(255,255,255,.85);font-size:13px;margin-top:4px;font-family:sans-serif;text-align:center;max-width:80vw;padding:0 16px;"></div>
 </div>
 <script>
 (function(){var I=${imgsJson},c=0,b=document.getElementById('vlb-${lbId}');
-function s(i){c=(i+I.length)%I.length;document.getElementById('vi-${lbId}').src=I[c].url;document.getElementById('vi-${lbId}').alt=I[c].alt;}
+function s(i){c=(i+I.length)%I.length;
+  var el=document.getElementById('vi-${lbId}');el.src=I[c].url;el.alt=I[c].alt;
+  var cap=document.getElementById('vc-${lbId}');if(cap)cap.textContent=I[c].alt;
+  var cnt=document.getElementById('vt-${lbId}');if(cnt)cnt.textContent=(c+1)+' / '+I.length;
+}
 function o(i){b.classList.add('open');document.body.style.overflow='hidden';s(i);}
+function cl(){b.classList.remove('open');document.body.style.overflow='';}
 document.getElementById('vp-${lbId}').onclick=function(){s(c-1);};
 document.getElementById('vn-${lbId}').onclick=function(){s(c+1);};
-b.onclick=function(e){if(e.target===b){b.classList.remove('open');document.body.style.overflow='';}};
+b.onclick=function(e){if(e.target===b)cl();};
 document.addEventListener('click',function(e){var a=e.target.closest('[data-vlb="${lbId}"]');if(a){e.preventDefault();o(parseInt(a.dataset.idx)||0);}});
-document.addEventListener('keydown',function(e){if(!b.classList.contains('open'))return;if(e.key==='ArrowRight')s(c+1);if(e.key==='ArrowLeft')s(c-1);if(e.key==='Escape'){b.classList.remove('open');document.body.style.overflow='';}});
+document.addEventListener('keydown',function(e){if(!b.classList.contains('open'))return;if(e.key==='ArrowRight')s(c+1);if(e.key==='ArrowLeft')s(c-1);if(e.key==='Escape')cl();});
 })();
 </script>`;
 }
@@ -580,17 +587,14 @@ function authHeaderWp() {
 }
 
 
-// Verifica se já existe post com esse título (evita duplicatas em múltiplos runs no mesmo dia)
-async function tituloJaExiste(titulo) {
+// Verifica por SLUG (antes da chamada à IA — economiza OpenAI e é 100% exato)
+async function slugJaExiste(slug) {
   try {
-    const encoded = encodeURIComponent(titulo.replace(/<[^>]+>/g, '').trim());
-    const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?search=${encoded}&per_page=5&status=any&_fields=id,title,status`;
+    const url = `${CONFIG.wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&status=any&per_page=1&_fields=id`;
     const r = await fetch(url, { headers: authHeaderWp() });
     if (!r.ok) return false;
     const posts = await r.json();
-    if (!Array.isArray(posts)) return false;
-    const tituloLimpo = titulo.replace(/<[^>]+>/g, '').trim().toLowerCase();
-    return posts.some(p => (p.title?.rendered || '').replace(/<[^>]+>/g, '').trim().toLowerCase() === tituloLimpo);
+    return Array.isArray(posts) && posts.length > 0;
   } catch { return false; }
 }
 
@@ -776,16 +780,17 @@ async function main() {
     const rotulo = `[${indiceGlobal}] ${servico.nome} × ${localidade.nome}`;
 
     try {
+      // Verificar duplicata pelo slug ANTES de chamar a IA (economiza tokens)
+      const slugPrevisto = slugify(`${servico.nome}-em-${localidade.nome}`);
+      if (await slugJaExiste(slugPrevisto)) {
+        console.log(`Pulando (slug já existe): ${slugPrevisto}`);
+        resultados.push({ rotulo, sucesso: true, postId: null, link: null, pulado: true });
+        continue;
+      }
+
       console.log(`Gerando conteúdo: ${rotulo}`);
       const conteudo = await gerarConteudoComIA({ servico, localidade });
       const tituloPagina = conteudo.titulo;
-
-      // Evitar duplicatas: pular se já existe post com esse título
-      if (await tituloJaExiste(tituloPagina)) {
-        console.log(`Duplicata detectada, pulando: ${tituloPagina}`);
-        resultados.push({ rotulo, sucesso: true, postId: null, link: null });
-        continue;
-      }
 
       console.log(`Resolvendo tags no WordPress: ${rotulo}`);
       const tagServicoId = await buscarOuCriarTag(servico.nome);
@@ -823,8 +828,10 @@ async function main() {
     }
   }
 
-  const falhas = resultados.filter((r) => !r.sucesso);
-  console.log(`\nResumo: ${resultados.length - falhas.length} ok, ${falhas.length} falha(s).`);
+  const falhas  = resultados.filter((r) => !r.sucesso);
+  const pulados   = resultados.filter((r) => r.pulado);
+  const publicados = resultados.filter((r) => r.sucesso && !r.pulado);
+  console.log(`\n📊 Resumo: ${publicados.length} publicados, ${pulados.length} pulados (já existiam), ${falhas.length} falha(s).`);
 
   if (falhas.length > 0) {
     console.error("Combinações que falharam:", JSON.stringify(falhas, null, 2));
