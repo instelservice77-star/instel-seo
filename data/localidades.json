@@ -1,0 +1,3412 @@
+[
+  {
+    "nome": "Alto de Pinheiros",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Itaim Bibi",
+      "Jardim Paulista",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Anhanguera",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Perus"
+    ]
+  },
+  {
+    "nome": "Aricanduva",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Carrão",
+      "Vila Formosa"
+    ]
+  },
+  {
+    "nome": "Artur Alvim",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cangaíba",
+      "Penha",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Barra Funda",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Bela Vista",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Belém",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Bom Retiro",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Brasilândia",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Freguesia do Ó"
+    ]
+  },
+  {
+    "nome": "Brás",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Belém",
+      "Mooca",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Butantã",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Morumbi",
+      "Raposo Tavares",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Cachoeirinha",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Casa Verde",
+      "Limão"
+    ]
+  },
+  {
+    "nome": "Cambuci",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Campo Belo",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Campo Grande",
+      "Santo Amaro"
+    ]
+  },
+  {
+    "nome": "Campo Grande",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Campo Belo",
+      "Santo Amaro"
+    ]
+  },
+  {
+    "nome": "Campo Limpo",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Capão Redondo",
+      "Vila Andrade"
+    ]
+  },
+  {
+    "nome": "Cangaíba",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Artur Alvim",
+      "Penha",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Capão Redondo",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Campo Limpo",
+      "Vila Andrade"
+    ]
+  },
+  {
+    "nome": "Carrão",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Aricanduva",
+      "Vila Formosa"
+    ]
+  },
+  {
+    "nome": "Casa Verde",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cachoeirinha",
+      "Limão"
+    ]
+  },
+  {
+    "nome": "Cidade Ademar",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Pedreira"
+    ]
+  },
+  {
+    "nome": "Cidade Dutra",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Grajaú",
+      "Socorro"
+    ]
+  },
+  {
+    "nome": "Cidade Líder",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Itaquera",
+      "José Bonifácio",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Cidade Tiradentes",
+    "tipo": "bairro"
+  },
+  {
+    "nome": "Consolação",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Liberdade",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Cursino",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Ipiranga",
+      "Sacomã"
+    ]
+  },
+  {
+    "nome": "Ermelino Matarazzo",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Ponte Rasa"
+    ]
+  },
+  {
+    "nome": "Freguesia do Ó",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Brasilândia"
+    ]
+  },
+  {
+    "nome": "Grajaú",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Dutra",
+      "Socorro"
+    ]
+  },
+  {
+    "nome": "Guaianases",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Lajeado"
+    ]
+  },
+  {
+    "nome": "Iguatemi",
+    "tipo": "bairro",
+    "vizinhos": [
+      "São Mateus",
+      "São Rafael"
+    ]
+  },
+  {
+    "nome": "Ipiranga",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cursino",
+      "Sacomã"
+    ]
+  },
+  {
+    "nome": "Itaim Bibi",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Jardim Paulista",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Itaim Paulista",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Vila Curuçá"
+    ]
+  },
+  {
+    "nome": "Itaquera",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Líder",
+      "José Bonifácio",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Jabaquara",
+    "tipo": "bairro"
+  },
+  {
+    "nome": "Jaguara",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Jaguaré",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Lapa",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Jaraguá",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Pirituba",
+      "São Domingos"
+    ]
+  },
+  {
+    "nome": "Jardim Helena",
+    "tipo": "bairro",
+    "vizinhos": [
+      "São Miguel",
+      "Vila Jacuí"
+    ]
+  },
+  {
+    "nome": "Jardim Paulista",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Itaim Bibi",
+      "Pinheiros"
+    ]
+  },
+  {
+    "nome": "Jardim São Luís",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jardim Ângela"
+    ]
+  },
+  {
+    "nome": "Jardim Ângela",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jardim São Luís"
+    ]
+  },
+  {
+    "nome": "Jaçanã",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Tremembé"
+    ]
+  },
+  {
+    "nome": "José Bonifácio",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Líder",
+      "Itaquera",
+      "Parque do Carmo"
+    ]
+  },
+  {
+    "nome": "Lajeado",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Guaianases"
+    ]
+  },
+  {
+    "nome": "Lapa",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Perdizes",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Liberdade",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "República",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Limão",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cachoeirinha",
+      "Casa Verde"
+    ]
+  },
+  {
+    "nome": "Mandaqui",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Santana",
+      "Tucuruvi"
+    ]
+  },
+  {
+    "nome": "Marsilac",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Parelheiros"
+    ]
+  },
+  {
+    "nome": "Moema",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Saúde",
+      "Vila Mariana"
+    ]
+  },
+  {
+    "nome": "Mooca",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Pari",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Morumbi",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Butantã",
+      "Raposo Tavares",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Parelheiros",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Marsilac"
+    ]
+  },
+  {
+    "nome": "Pari",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Tatuapé",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Parque do Carmo",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Líder",
+      "Itaquera",
+      "José Bonifácio"
+    ]
+  },
+  {
+    "nome": "Pedreira",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Ademar"
+    ]
+  },
+  {
+    "nome": "Penha",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Artur Alvim",
+      "Cangaíba",
+      "Vila Matilde"
+    ]
+  },
+  {
+    "nome": "Perdizes",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Vila Leopoldina"
+    ]
+  },
+  {
+    "nome": "Perus",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Anhanguera"
+    ]
+  },
+  {
+    "nome": "Pinheiros",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Alto de Pinheiros",
+      "Itaim Bibi",
+      "Jardim Paulista"
+    ]
+  },
+  {
+    "nome": "Pirituba",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jaraguá",
+      "São Domingos"
+    ]
+  },
+  {
+    "nome": "Ponte Rasa",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Ermelino Matarazzo"
+    ]
+  },
+  {
+    "nome": "Raposo Tavares",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Rio Pequeno",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "República",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "Santa Cecília",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Rio Pequeno",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Raposo Tavares",
+      "Vila Sônia"
+    ]
+  },
+  {
+    "nome": "Sacomã",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cursino",
+      "Ipiranga"
+    ]
+  },
+  {
+    "nome": "Santa Cecília",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Sé"
+    ]
+  },
+  {
+    "nome": "Santana",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Mandaqui",
+      "Tucuruvi"
+    ]
+  },
+  {
+    "nome": "Santo Amaro",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Campo Belo",
+      "Campo Grande"
+    ]
+  },
+  {
+    "nome": "Sapopemba",
+    "tipo": "bairro"
+  },
+  {
+    "nome": "Saúde",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Moema",
+      "Vila Mariana"
+    ]
+  },
+  {
+    "nome": "Socorro",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Cidade Dutra",
+      "Grajaú"
+    ]
+  },
+  {
+    "nome": "São Domingos",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jaraguá",
+      "Pirituba"
+    ]
+  },
+  {
+    "nome": "São Lucas",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Vila Prudente"
+    ]
+  },
+  {
+    "nome": "São Mateus",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Iguatemi",
+      "São Rafael"
+    ]
+  },
+  {
+    "nome": "São Miguel",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jardim Helena",
+      "Vila Jacuí"
+    ]
+  },
+  {
+    "nome": "São Rafael",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Iguatemi",
+      "São Mateus"
+    ]
+  },
+  {
+    "nome": "Sé",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Bela Vista",
+      "Bom Retiro",
+      "Cambuci",
+      "Consolação",
+      "Liberdade",
+      "República",
+      "Santa Cecília"
+    ]
+  },
+  {
+    "nome": "Tatuapé",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Água Rasa"
+    ]
+  },
+  {
+    "nome": "Tremembé",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jaçanã"
+    ]
+  },
+  {
+    "nome": "Tucuruvi",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Mandaqui",
+      "Santana"
+    ]
+  },
+  {
+    "nome": "Vila Andrade",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Campo Limpo",
+      "Capão Redondo"
+    ]
+  },
+  {
+    "nome": "Vila Curuçá",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Itaim Paulista"
+    ]
+  },
+  {
+    "nome": "Vila Formosa",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Aricanduva",
+      "Carrão"
+    ]
+  },
+  {
+    "nome": "Vila Guilherme",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Vila Maria",
+      "Vila Medeiros"
+    ]
+  },
+  {
+    "nome": "Vila Jacuí",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Jardim Helena",
+      "São Miguel"
+    ]
+  },
+  {
+    "nome": "Vila Leopoldina",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Barra Funda",
+      "Jaguara",
+      "Jaguaré",
+      "Lapa",
+      "Perdizes"
+    ]
+  },
+  {
+    "nome": "Vila Maria",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Vila Guilherme",
+      "Vila Medeiros"
+    ]
+  },
+  {
+    "nome": "Vila Mariana",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Moema",
+      "Saúde"
+    ]
+  },
+  {
+    "nome": "Vila Matilde",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Artur Alvim",
+      "Cangaíba",
+      "Penha"
+    ]
+  },
+  {
+    "nome": "Vila Medeiros",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Vila Guilherme",
+      "Vila Maria"
+    ]
+  },
+  {
+    "nome": "Vila Prudente",
+    "tipo": "bairro",
+    "vizinhos": [
+      "São Lucas"
+    ]
+  },
+  {
+    "nome": "Vila Sônia",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Butantã",
+      "Morumbi",
+      "Raposo Tavares",
+      "Rio Pequeno"
+    ]
+  },
+  {
+    "nome": "Água Rasa",
+    "tipo": "bairro",
+    "vizinhos": [
+      "Belém",
+      "Brás",
+      "Mooca",
+      "Pari",
+      "Tatuapé"
+    ]
+  },
+  {
+    "nome": "Adamantina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Adolfo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Aguaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Agudos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Alambari",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Alfredo Marcondes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Altair",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Altinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Alto Alegre",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Alumínio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Alvinlândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Americana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Amparo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Américo Brasiliense",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Américo de Campos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Analândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Andradina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Angatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Anhembi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Anhumas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Aparecida",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Aparecida d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Apiaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Aramina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Arandu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Arapeí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Araraquara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Araras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Araçariguama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Araçatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Araçoiaba da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Arco-Íris",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Arealva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Areias",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Areiópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ariranha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Artur Nogueira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Arujá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Aspásia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Assis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Atibaia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Auriflama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Avanhandava",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Avaré",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Avaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bady Bassitt",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Balbinos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bananal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barbosa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bariri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barra Bonita",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barra do Chapéu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barra do Turvo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barretos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barrinha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barueri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Barão de Antonina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bastos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Batatais",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bauru",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bebedouro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bento de Abreu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bernardino de Campos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bertioga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bilac",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Birigui",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Biritiba-Mirim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Boa Esperança do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bocaina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bofete",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Boituva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bom Jesus dos Perdões",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bom Sucesso de Itararé",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Boracéia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Borborema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Borebi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Borá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Botucatu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bragança Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Braúna",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Brejo Alegre",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Brodowski",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Brotas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Buri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Buritama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Buritizal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Bálsamo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cabreúva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cabrália Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cachoeira Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caconde",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cafelândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caiabu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caieiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caiuá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cajamar",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cajati",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cajobi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cajuru",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Campina do Monte Alegre",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Campinas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Campo Limpo Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Campos Novos Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Campos do Jordão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cananéia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Canas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Canitar",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Capela do Alto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Capivari",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Capão Bonito",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caraguatatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Carapicuíba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cardoso",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Casa Branca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Castilho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Catanduva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Catiguá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Caçapava",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cedral",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cerqueira César",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cerquilho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cesário Lange",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Charqueada",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Chavantes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Clementina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Colina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Colômbia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Conchal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Conchas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cordeirópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Coroados",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Coronel Macedo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Corumbataí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cosmorama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cosmópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cotia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cravinhos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cristais Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cruzeiro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cruzália",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cubatão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cunha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cássia dos Coqueiros",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cândido Mota",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Cândido Rodrigues",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Descalvado",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Diadema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dirce Reis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Divinolândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dobrada",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dois Córregos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dolcinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dourado",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dracena",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Duartina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Dumont",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Echaporã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Eldorado",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Elias Fausto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Elisiário",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Embaúba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Embu das Artes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Embu-Guaçu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Emilianópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Engenheiro Coelho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Espírito Santo do Pinhal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Espírito Santo do Turvo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Estiva Gerbi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Estrela d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Estrela do Norte",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Euclides da Cunha Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Fartura",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Fernando Prestes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Fernandópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Fernão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ferraz de Vasconcelos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Flora Rica",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Floreal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Florínia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Flórida Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Franca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Francisco Morato",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Franco da Rocha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Gabriel Monteiro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Garça",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Gastão Vidigal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Gavião Peixoto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "General Salgado",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Getulina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Glicério",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaimbê",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaiçara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guapiara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guapiaçu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaraci",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guarani d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guarantã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guararapes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guararema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaratinguetá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaraçaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guareí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guariba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guarujá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guarulhos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guará",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guatapará",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guaíra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Guzolândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Gália",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Herculândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Holambra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Hortolândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iacanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iacri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iaras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ibaté",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ibirarema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ibirá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ibitinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ibiúna",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Icém",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iepê",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Igarapava",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Igaratá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Igaraçu do Tietê",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iguape",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ilha Comprida",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ilha Solteira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ilhabela",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Indaiatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Indiana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Indiaporã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Inúbia Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ipaussu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iperó",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ipeúna",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ipiguá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iporanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ipuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Iracemápolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Irapuru",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Irapuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaberá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itajobi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaju",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itanhaém",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapecerica da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapetininga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapeva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapevi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapirapuã Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaporanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapura",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itapuí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaquaquecetuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itararé",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itariri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itatiba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itatinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itaóca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itirapina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itirapuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itobi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itupeva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ituverava",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Itápolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jaborandi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jaboticabal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jacareí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jaci",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jacupiranga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jaguariúna",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jales",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jambeiro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jandira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jardinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jarinu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jaú",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jeriquara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Joanópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "José Bonifácio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "João Ramalho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jumirim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Jundiaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Junqueirópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Juquitiba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Juquiá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Júlio Mesquita",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lagoinha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Laranjal Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lavrinhas",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lavínia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Leme",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lençóis Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Limeira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lindóia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lins",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lorena",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lourdes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Louveira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lucianópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lucélia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Luiziânia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lupércio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Lutécia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Luís Antônio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Macatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Macaubal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Macedônia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Magda",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mairinque",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mairiporã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Manduri",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Marabá Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Maracaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Marapoama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Marinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mariápolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Martinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Marília",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Matão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mauá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mendonça",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Meridiano",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mesópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Miguelópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mineiros do Tietê",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mira Estrela",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Miracatu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mirandópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mirante do Paranapanema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mirassol",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mirassolândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mococa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mogi Guaçu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mogi Mirim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mogi das Cruzes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mombuca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Mongaguá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Alegre do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Alto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Aprazível",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Azul Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Castelo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monte Mor",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monteiro Lobato",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Monções",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Morro Agudo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Morungaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Motuca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Murutinga do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nantes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Narandiba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Natividade da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nazaré Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Neves Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nhandeara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nipoã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Aliança",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Campina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Canaã Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Castilho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Europa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Granada",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Guataporanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Independência",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Luzitânia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nova Odessa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Novais",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Novo Horizonte",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Nuporanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ocauçu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Olímpia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Onda Verde",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Oriente",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Orindiúva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Orlândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Osasco",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Oscar Bressane",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Osvaldo Cruz",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ourinhos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ouro Verde",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ouroeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pacaembu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Palestina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Palmares Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Palmeira d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Palmital",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Panorama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paraguaçu Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paraibuna",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paranapanema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paranapuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Parapuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paraíso",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pardinho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pariquera-Açu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Parisi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Patrocínio Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paulicéia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paulistânia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paulo de Faria",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Paulínia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pederneiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedra Bela",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedranópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedregulho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedreira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedrinhas Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pedro de Toledo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Penápolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pereira Barreto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pereiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Peruíbe",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piacatu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piedade",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pilar do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pindamonhangaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pindorama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pinhalzinho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piquerobi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piquete",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piracaia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piracicaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piraju",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pirajuí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pirangi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pirapora do Bom Jesus",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pirapozinho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pirassununga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Piratininga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pitangueiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Planalto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Platina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Poloni",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pompéia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pongaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pontal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pontalinda",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pontes Gestal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Populina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Porangaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Porto Feliz",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Porto Ferreira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Potim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Potirendaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Poá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pracinha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pradópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Praia Grande",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Pratânia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Presidente Alves",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Presidente Bernardes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Presidente Epitácio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Presidente Prudente",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Presidente Venceslau",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Promissão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Quadra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Quatá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Queiroz",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Queluz",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Quintana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rafard",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rancharia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Redenção da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Regente Feijó",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Reginópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Registro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Restinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Bonito",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Branco",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Corrente",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Grande",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Pires",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão Preto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ribeirão dos Índios",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rifaina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rincão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rinópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rio Claro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rio Grande da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rio das Pedras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Riolândia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Riversul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rosana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Roseira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rubinéia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Rubiácea",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sabino",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sagres",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sales",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sales Oliveira",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Salesópolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Salmourão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Saltinho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Salto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Salto Grande",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Salto de Pirapora",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sandovalina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Adélia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Albertina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Branca",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Bárbara d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Clara d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Cruz da Conceição",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Cruz da Esperança",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Cruz das Palmeiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Cruz do Rio Pardo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Ernestina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Fé do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Gertrudes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Isabel",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Lúcia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Maria da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Mercedes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Rita d'Oeste",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Rita do Passa Quatro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Rosa de Viterbo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santa Salete",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santana da Ponte Pensa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santana de Parnaíba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Anastácio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo André",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Antônio da Alegria",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Antônio de Posse",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Antônio do Aracanguá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Antônio do Jardim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Antônio do Pinhal",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santo Expedito",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Santópolis do Aguapeí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sarapuí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sarutaiá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sebastianópolis do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Serra Azul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Serra Negra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Serrana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sertãozinho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sete Barras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Severínia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Silveiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Socorro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sorocaba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sud Mennucci",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Sumaré",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Suzano",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Suzanápolis",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Bento do Sapucaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Bernardo do Campo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Caetano do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Carlos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Francisco",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Joaquim da Barra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São José da Bela Vista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São José do Barreiro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São José do Rio Pardo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São José do Rio Preto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São José dos Campos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São João da Boa Vista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São João das Duas Pontes",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São João de Iracema",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São João do Pau d'Alho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Lourenço da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Luiz do Paraitinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Manuel",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Miguel Arcanjo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Pedro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Pedro do Turvo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Roque",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Sebastião",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Sebastião da Grama",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Simão",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "São Vicente",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tabapuã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tabatinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taboão da Serra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taciba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taguaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taiaçu",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taiúva",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tambaú",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tanabi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tapiratiba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tapiraí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taquaral",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taquaritinga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taquarituba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taquarivaí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tarabai",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tarumã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tatuí",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Taubaté",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tejupá",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Teodoro Sampaio",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Terra Roxa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tietê",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Timburi",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Torre de Pedra",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Torrinha",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Trabiju",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tremembé",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Três Fronteiras",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tuiuti",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tupi Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Tupã",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Turiúba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Turmalina",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ubarana",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ubatuba",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Ubirajara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Uchoa",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "União Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Uru",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Urupês",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Urânia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Valentim Gentil",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Valinhos",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Valparaíso",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vargem",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vargem Grande Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vargem Grande do Sul",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vera Cruz",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vinhedo",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Viradouro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vista Alegre do Alto",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Vitória Brasil",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Votorantim",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Votuporanga",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Várzea Paulista",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Zacarias",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Águas da Prata",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Águas de Lindóia",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Águas de Santa Bárbara",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Águas de São Pedro",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Álvares Florence",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Álvares Machado",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Álvaro de Carvalho",
+    "tipo": "municipio"
+  },
+  {
+    "nome": "Óleo",
+    "tipo": "municipio"
+  }
+]
