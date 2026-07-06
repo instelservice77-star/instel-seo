@@ -62,16 +62,16 @@ function montarLinkWhatsapp(mensagem) {
 //    Se o arquivo não existir, a imagem é simplesmente ignorada (sem erro).
 // ---------------------------------------------------------------------------
 const IMAGENS_META = [
-  { arquivo: "eletrica-01.webp", alt: "engenheiro elétrico realizando inspeção em painel elétrico de baixa tensão" },
-  { arquivo: "eletrica-02.webp", alt: "quadro de distribuição elétrica com disjuntores identificados em laudo técnico" },
-  { arquivo: "eletrica-03.webp", alt: "medição de corrente elétrica com alicate amperímetro em instalação comercial" },
-  { arquivo: "eletrica-04.webp", alt: "fiação elétrica com inconformidade identificada e marcada em vistoria NR-10" },
-  { arquivo: "eletrica-05.webp", alt: "aterramento elétrico sendo verificado em medição de resistência" },
-  { arquivo: "eletrica-06.webp", alt: "inspeção de instalação elétrica em área classificada com risco de explosão" },
-  { arquivo: "eletrica-07.webp", alt: "laudo elétrico com relatório de não conformidades e recomendações técnicas" },
-  { arquivo: "eletrica-08.webp", alt: "tomada e ponto elétrico com marcação técnica em vistoria de imóvel" },
-  { arquivo: "eletrica-09.webp", alt: "SPDA para-raios sendo inspecionado conforme NBR 5419 em edificação" },
-  { arquivo: "eletrica-10.webp", alt: "medidor de tensão verificando conformidade de instalação elétrica residencial" },
+  { arquivo: "art-eletrica-01.webp", alt: "engenheiro elétrico realizando inspeção técnica em instalação de baixa tensão" },
+  { arquivo: "art-eletrica-02.webp", alt: "laudo elétrico com ART do CREA-SP e assinatura de engenheiro responsável" },
+  { arquivo: "art-eletrica-03.webp", alt: "painel elétrico com disjuntores identificados em vistoria técnica" },
+  { arquivo: "art-instalacoes-eletricas-01.webp", alt: "instalação elétrica residencial com fiação organizada e identificada" },
+  { arquivo: "art-instalacoes-eletricas-02.webp", alt: "quadro de distribuição elétrica sendo inspecionado por engenheiro" },
+  { arquivo: "art-instalacoes-eletricas-03.webp", alt: "medição elétrica com equipamentos técnicos em instalação comercial" },
+  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-01.webp", alt: "consultoria elétrica para adequação NR-10 em empresa em São Paulo" },
+  { arquivo: "consultoria-eletrica-adequacao-nr-10-sao-paulo-02.webp", alt: "engenheiro realizando diagnóstico elétrico para adequação à NR-10" },
+  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-01.webp", alt: "laudo técnico elétrico sendo elaborado por engenheiro CREA-SP em São Paulo" },
+  { arquivo: "consultoria-eletrica-laudo-tecnico-sao-paulo-02.webp", alt: "relatório técnico de instalação elétrica com fotos e recomendações" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -805,3 +805,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(1);
   });
 }
+
